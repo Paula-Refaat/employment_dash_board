@@ -1,0 +1,25 @@
+body{
+    overflow-x: hidden;  
+     
+}
+.main{
+    width: 100%;
+    height: 100%;
+    padding: 35px 15px;
+    border-top: 1px solid #ddd;
+    /* background-color: rgb(232, 238, 238);  */
+}
+
+.videos_container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: row;
+    overflow-x: hidden; 
+}
+/* .card:hover{
+    transform:scale(1.1);
+} */
+.info{
+text-align: center;
+}

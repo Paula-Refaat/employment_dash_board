@@ -103,7 +103,7 @@ const AddEdit = () => {
                 onChange={handleInputChange}
                 />
                 
-                 <label htmlFor='password'>Password</label>
+                <label htmlFor='password'>Password</label>
                 <input 
                 type="password"
                 id='password'
@@ -123,14 +123,12 @@ const AddEdit = () => {
                 />
 
             <label htmlFor='status'>Status</label>
-                <input 
-                type="text"
-                id='status'
-                name='status'
-                placeholder='Your status  ...'
-                value={status || ""}
-                onChange={handleInputChange}
-                />
+
+            <select className='status' name="status" value={status || ""} onChange={handleInputChange}>
+            <option>Select Status...</option>
+            <option className='status-act'>Active</option>
+            <option className='status-inact'>inActive</option>
+            </select>
                 <input type="submit" value={id ? "Update" : "save"}/>
                 <Link to={"/"}>
                     <input type="button" value={"Go Back"}/>

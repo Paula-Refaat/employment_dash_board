@@ -1,9 +1,8 @@
 import React, { useState , useEffect } from 'react';
 import {useNavigate, Link, useParams} from 'react-router-dom';
-
+import './Style/AddEditQualification.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-
 
 const initialState = {
     description : "",
@@ -54,25 +53,22 @@ const AddEditQualification = () => {
     };
 
     return (
-        <div style={{marginTop : "100px"}}>
-            <form style={{
-                margin : "auto",
-                padding : "15px",
-                maxWidth : "400px",
-                alignContent : 'center'
-            }}
+        <div className='container'>
+        <div style={{marginTop : "140px"}}>
+            <form 
                 onSubmit = {handleSubmit} 
             >
-
                 <div class="mb-3 col-lg-12 col-md-12 col-12">
                     <h3 style={{color : "red", 
                     alignContent : 'center'
                     }}>Add / Update Qualification</h3>
-                <textarea name="description" value={description} onChange={handleInputChange} className="form-control" id="" cols="30" rows="5"></textarea>
+                
+                    <textarea name="description" value={description} onChange={handleInputChange} className="form-control" id="" cols="30" rows="5"></textarea>
                 </div>
                     
                 <input type="submit" value={id ? "Update" : "save"}/>
-            </form>
+             </form>
+            </div>
             </div>
     );
 };
