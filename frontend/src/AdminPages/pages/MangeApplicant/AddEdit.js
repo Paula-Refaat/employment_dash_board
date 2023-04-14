@@ -36,7 +36,6 @@ const AddEdit = () => {
             toast.error("Please Enter Valid Email");
         }
         else{
-
             // Add User
             if(!id){
                 axios.post("http://localhost:5000/api/post", {
@@ -129,6 +128,7 @@ const AddEdit = () => {
             <option className='status-act'>Active</option>
             <option className='status-inact'>inActive</option>
             </select>
+            
                 <input type="submit" value={id ? "Update" : "save"}/>
                 <Link to={"/"}>
                     <input type="button" value={"Go Back"}/>

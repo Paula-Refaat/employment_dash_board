@@ -7,8 +7,10 @@ import AddEdit from "./AdminPages/pages/MangeApplicant/AddEdit";
 import ViewApplicants from "./AdminPages/pages/MangeApplicant/ViewApplicants";
 import Qualifications from "./AdminPages/pages/ManageQualifications/Qualifications";
 import AddEditQualification from "./AdminPages/pages/ManageQualifications/AddEditQualification";
+import Jobs from "./AdminPages/pages/ManageJobs/Jobs";
+import AddEditJob from "./AdminPages/pages/ManageJobs/AddEditJob";
 
-{/* <Route path="/viewuser/:id" Component={ViewUser}/> */}
+
 
 function App() {
   return (
@@ -25,6 +27,10 @@ function App() {
         <Route path="/qualifications" Component={Qualifications} />
         <Route path="/addqualification" Component={AddEditQualification} />
         <Route path="/updatequalification/:id" Component={AddEditQualification} />
+        <Route path="/jobs" Component={Jobs} />
+        <Route path="/addjob" Component={AddEditJob} />
+        <Route path="/updatejob/:ID" Component={AddEditJob} />
+       
       </Routes>
     </div>
     

@@ -50,10 +50,6 @@ router.put("/api/updatqualification/:id", (req, res) => {
 
 
 
-
-
-
-
 // router.get("/",(req,res) => {
 
 //     const sqlInsert = "INSERT INTO `qualification` (`description`) VALUES ('backend 5 years')";

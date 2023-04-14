@@ -18,7 +18,7 @@ const ViewApplicants = () => {
                 <div className='card-header'>
                     <p>User Contact Details</p>
                 </div>
-                <div className='container'>
+                <div >
                     <strong>ID: </strong>
                     <span>{id}</span>
                     <br/><br/>
@@ -43,8 +43,6 @@ const ViewApplicants = () => {
                     <Link to={`/updateuser/${id}`} >
                         <div className='btn btn-edit'>Update</div>
                     </Link>                
-
-
                 </div>
             </div>
         </div>

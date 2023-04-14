@@ -67,6 +67,9 @@ const AddEditQualification = () => {
                 </div>
                     
                 <input type="submit" value={id ? "Update" : "save"}/>
+                <Link to={"/qualifications"}>
+                <input type="button" value={"Go Back"}/>
+            </Link>
              </form>
             </div>
             </div>
