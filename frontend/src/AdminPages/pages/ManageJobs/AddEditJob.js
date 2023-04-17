@@ -54,11 +54,11 @@ useEffect(() =>{
                         }).then(()=>{
                             setState({ Position:"", Description:"", Offer:"", MaxCandidateNumber:"", Qualification:""});
                         }).catch((err) => toast.error(err.response.data));
-                        toast.success("Contact Added Successfully");
+                        toast.success("Job Added Successfully");
         
                         // Update User
                     } else{
-                        axios.put(`http://localhost:5000/api/updatejob/${ID}`, {
+                        axios.put(`http://localhost:5000/api/update-job/${ID}`, {
                             Position,
                             Description,
                             Offer,
@@ -67,7 +67,7 @@ useEffect(() =>{
                         }).then(()=>{
                             setState({ Position:"", Description:"", Offer:"", MaxCandidateNumber:"", Qualification:""});
                         }).catch((err) => toast.error(err.response.data));
-                        toast.success("Contact Updated Successfully");
+                        toast.success("Job Updated Successfully");
                     }
         
                     setTimeout(() => navigate("/jobs"), 500);

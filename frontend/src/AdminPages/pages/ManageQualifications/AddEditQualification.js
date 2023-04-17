@@ -31,16 +31,16 @@ const AddEditQualification = () => {
                 }).then(()=>{
                     setState({ description:""});
                 }).catch((err) => toast.error(err.response.data));
-                toast.success("Contact Added Successfully");
+                toast.success("Qualification Added Successfully");
 
                 // Update User
             } else{
-                axios.put(`http://localhost:5000/api/updatqualification/${id}`, {
+                axios.put(`http://localhost:5000/api/update-qualification/${id}`, {
                     description,
                 }).then(()=>{
                     setState({ description:""});
                 }).catch((err) => toast.error(err.response.data));
-                toast.success("Contact Updated Successfully");
+                toast.success("Qualification Updated Successfully");
             }
 
             setTimeout(() => navigate("/qualifications"), 500);

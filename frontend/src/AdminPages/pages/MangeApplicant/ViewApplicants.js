@@ -9,7 +9,7 @@ const ViewApplicants = () => {
     const {id} = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/get/${id}`).then((resp) => setUser({ ...resp.data[0]}))
+        axios.get(`http://localhost:5000/api/get-applicant/${id}`).then((resp) => setUser({ ...resp.data[0]}))
     },[id])
 
     return (
@@ -37,7 +37,7 @@ const ViewApplicants = () => {
                     <strong>Status: </strong>
                     <span>{user.status}</span>
                     <br/><br/>
-                    <Link to={"/"} >
+                    <Link to={"/applicants"} >
                         <div className='btn btn-view'>Go Back</div>
                     </Link>    
                     <Link to={`/updateuser/${id}`} >

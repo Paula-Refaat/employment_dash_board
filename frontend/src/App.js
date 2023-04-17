@@ -10,6 +10,7 @@ import AddEditQualification from "./AdminPages/pages/ManageQualifications/AddEdi
 import Jobs from "./AdminPages/pages/ManageJobs/Jobs";
 import AddEditJob from "./AdminPages/pages/ManageJobs/AddEditJob";
 import ShowRequests from "./AdminPages/pages/ManageRequests/ShowRequests";
+import ShowHistory from "./AdminPages/pages/ManageRequests/ShowHistory";
 
 
 
@@ -22,7 +23,9 @@ function App() {
 
       <Routes>
         {/* Applicant */}
-        <Route exact path="/" Component={Applicant} />
+
+        {/* <Route exact path="/" Component={} /> */}
+        <Route exact path="/applicants" Component={Applicant} />
         <Route path="/adduser" Component={AddEdit} />
         <Route path="/updateuser/:id" Component={AddEdit} />
         <Route path="/viewuser/:id" Component={ViewApplicants} />
@@ -39,6 +42,7 @@ function App() {
 
         {/* Requsts */}
         <Route  path="/requests" Component={ShowRequests} />
+        <Route path="/history-requests" Component={ShowHistory} />
        
        
       </Routes>

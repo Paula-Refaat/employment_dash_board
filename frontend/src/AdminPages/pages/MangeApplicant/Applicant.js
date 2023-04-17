@@ -9,7 +9,7 @@ const Applicant = () => {
     const[data, setData] = useState([]);
     
     const loadData = async () => {
-        const respons = await axios.get("http://localhost:5000/api/get");
+        const respons = await axios.get("http://localhost:5000/api/get-applicant");
         setData(respons.data);
     };
 
@@ -19,7 +19,7 @@ const Applicant = () => {
 
     const deleteUser = (id) => {
         if(window.confirm("Are You Sure That Wanted Delete that ?")){
-            axios.delete(`http://localhost:5000/api/remove/${id}`);
+            axios.delete(`http://localhost:5000/api/remove-applicant/${id}`);
             toast.success("content Deleted Successfully");
             setTimeout( () => loadData(), 500);
         }

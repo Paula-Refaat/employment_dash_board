@@ -19,7 +19,7 @@ const Jobs = () => {
     const deleteJob = (ID) => {
         if(window.confirm("Are You Sure That Wanted Delete that ?")){
             axios.delete(`http://localhost:5000/api/remove-job/${ID}`);
-            toast.success("content Deleted Successfully");
+            toast.success("Job Deleted Successfully");
             setTimeout( () => loadData(), 500);
         }
     }
@@ -61,9 +61,6 @@ const Jobs = () => {
                                         <button className='btn btn-edit'>Edit</button>
                                     </Link>
                                     <button className='btn btn-delete' onClick={() => deleteJob(item.ID)}>Delete</button>
-                                    {/* <Link to={`/viewuser/${item.id}`}>
-                                        <button className='btn btn-view'>View</button>
-                                    </Link> */}
                                 </td>
 
                             </tr>

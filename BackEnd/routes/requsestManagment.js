@@ -2,32 +2,45 @@ const router = require("express").Router();
 const db = require ("../Database/DatabseConn");
 
 
+
+// Select All Requests
 router.get("/api/get-requests", (req, res) => {
-    const sqlGet = "SELECT * FROM job_requests";
+    const sqlGet = "SELECT * FROM job_requests WHERE status='Pending'";
+    db.query(sqlGet, (error, result)=>{
+        res.send(result);
+    });
+}); 
+
+// Select History Requests
+router.get("/api/get-history-requests", (req, res) => {
+    const sqlGet = "SELECT * FROM job_requests WHERE status='Accepted' or status = 'Rejected'";
     db.query(sqlGet, (error, result)=>{
         res.send(result);
     });
 }); 
 
 
-router.get("/api/get-request/:ID", (req, res) => {
-    const{ id } = req.params;
-    const sqlGet = "SELECT * FROM job_requests WHERE ID=?";
-    db.query(sqlGet, id , (error, result)=>{
-        res.send(result);
-    });
-});
-
-
-router.put("/api/accept/:ID", (req, res) => {
-    const{ ID } = req.params;
-     const{status} = req.body; 
+// Accept a Request
+router.put("/api/accept-request/:ID", (req, res) => {
+     const{ ID } = req.params;
     const sqlUpdata = "UPDATE `job_requests` SET `status`='Accepted' WHERE ID=?";
-    db.query(sqlUpdata, [status,ID] , (error, result)=>{
+    db.query(sqlUpdata, [ID] , (error, result)=>{
         res.send(result);
     });
 });
 
+
+// Reject a Request
+router.put("/api/reject-request/:ID", (req, res) => {
+    const{ ID } = req.params;
+   const sqlUpdata = "UPDATE `job_requests` SET `status`='Rejected' WHERE ID=?";
+   db.query(sqlUpdata, [ID] , (error, result)=>{
+    res.send(result);
+});
+});
+
+
+// delete Request
 router.delete("/api/remove-request/:ID",(req,res) => {
     const{ ID } = req.params;
     const sqlRemove = "DELETE FROM `job_requests` WHERE ID=? ";
@@ -37,17 +50,5 @@ router.delete("/api/remove-request/:ID",(req,res) => {
         }
     });
 });
-
-
-
-// router.get("/",(req,res) => {
-
-//     const sqlInsert = "INSERT INTO `job_requests` (`job_ID`, `user_ID`, `status`) VALUES ('7','202002','Accepted')";
-//     db.query(sqlInsert, (err,result)=>{
-//         console.log("error: ",err);
-//         console.log("Results: ",result);
-//         res.send("Hello Express");
-//     })
-// });
 
 module.exports = router;

@@ -3,8 +3,8 @@ const db = require("../Database/DatabseConn");
 //const bycrbt = require('bcrypt');
 
 
-//SelectAll From Applicant
-router.get("/api/get", (req, res) => {
+//Select All Applicant
+router.get("/api/get-applicant", (req, res) => {
     const sqlGet = "SELECT * FROM users ORDER BY name";
     db.query(sqlGet, (error, result)=>{
         res.send(result);
@@ -13,7 +13,7 @@ router.get("/api/get", (req, res) => {
 
 
 //create Post API.
-router.post("/api/post",(req,res) => {
+router.post("/api/post-applicant",(req,res) => {
     const{name,email,password,phone,status} = req.body;
     const sqlInsert = "INSERT INTO `users` (`name`, `email`, `password`,`phone`,`status`) VALUES (?, ?, ?, ?, ?)";
     db.query(sqlInsert, [name, email, password, phone, status], (error, result)=>{
@@ -24,7 +24,7 @@ router.post("/api/post",(req,res) => {
 });
 
 
-router.delete("/api/remove/:id",(req,res) => {
+router.delete("/api/remove-applicant/:id",(req,res) => {
     const{ id } = req.params;
     const sqlRemove = "DELETE FROM `users` WHERE id=? ";
     db.query(sqlRemove, [ id ], (error, result)=>{
@@ -34,7 +34,7 @@ router.delete("/api/remove/:id",(req,res) => {
     });
 });
 
-router.get("/api/get/:id", (req, res) => {
+router.get("/api/get-applicant/:id", (req, res) => {
     const{ id } = req.params;
     const sqlGet = "SELECT * FROM users WHERE id=?";
     db.query(sqlGet, id , (error, result)=>{
@@ -42,7 +42,7 @@ router.get("/api/get/:id", (req, res) => {
     });
 });
 
-router.put("/api/updateuser/:id", (req, res) => {
+router.put("/api/update-applicant/:id", (req, res) => {
     const{ id } = req.params;
     const{name, email, phone, password, status} = req.body;
     const sqlUpdata = "UPDATE users SET name=? , email=? , phone=?, password=?, status=? WHERE id=? ";

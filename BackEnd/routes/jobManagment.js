@@ -2,7 +2,7 @@ const router = require("express").Router();
 const db = require("../Database/DatabseConn");
 
 
-//SelectAll From Jobs
+//Select All From Jobs
 router.get("/api/get-jobs", (req, res) => {
     const sqlGet = "SELECT * FROM job";
     db.query(sqlGet, (error, result)=>{
@@ -11,7 +11,7 @@ router.get("/api/get-jobs", (req, res) => {
 });
 
 
-//create Post API.
+//Save New Job
 router.post("/api/post-job",(req,res) => {
     const{Position,Description,Offer,MaxCandidateNumber,Qualification} = req.body;
     const sqlInsert = "INSERT INTO `job` (`Position`, `Description`, `Offer`,`MaxCandidateNumber`,`Qualification`) VALUES (?, ?, ?, ?, ?)";
@@ -22,7 +22,7 @@ router.post("/api/post-job",(req,res) => {
     });
 });
 
-
+// Delete Job
 router.delete("/api/remove-job/:ID",(req,res) => {
     const{ ID } = req.params;
     const sqlRemove = "DELETE FROM `job` WHERE ID=? ";
@@ -33,6 +33,7 @@ router.delete("/api/remove-job/:ID",(req,res) => {
     });
 });
 
+//Select Spacific Job
 router.get("/api/get-job/:ID", (req, res) => {
     const{ ID } = req.params;
     const sqlGet = "SELECT * FROM job WHERE ID=?";
@@ -41,7 +42,8 @@ router.get("/api/get-job/:ID", (req, res) => {
     });
 });
 
-router.put("/api/updatejob/:ID", (req, res) => {
+// Update Job
+router.put("/api/update-job/:ID", (req, res) => {
     const{ ID } = req.params;
     const{Position, Description, Offer, MaxCandidateNumber, Qualification} = req.body;
     const sqlUpdata = "UPDATE job SET Position=? , Description=? , Offer=?, MaxCandidateNumber=?, Qualification=? WHERE ID=? ";
@@ -50,12 +52,4 @@ router.put("/api/updatejob/:ID", (req, res) => {
     });
 });
 
-// router.get("/",(req,res) => {
-//     const sqlInsert = "INSERT INTO `job` (`Position`, `Description`, `Offer`, `MaxCandidateNumber`, `Qualification`) VALUES ('BackEnd','WebDeveloper','5000', '3', '5 years experence')";
-//     db.query(sqlInsert, (err,result)=>{
-//         console.log("error: ",err);
-//         console.log("Results: ",result);
-//         res.send("Hello Jobs");
-//     })
-// });
 module.exports = router;

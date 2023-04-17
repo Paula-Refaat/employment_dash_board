@@ -13,6 +13,7 @@ const initialState = {
 };
 
 const AddEdit = () => {
+    
     const [state, setState] = useState(initialState);
 
     const {name, email, password, phone, status} = state;
@@ -23,7 +24,7 @@ const AddEdit = () => {
 
     // select Spasific User
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/get/${id}`).then((resp) => setState({ ...resp.data[0]}))
+        axios.get(`http://localhost:5000/api/get-applicant/${id}`).then((resp) => setState({ ...resp.data[0]}))
     },[id])
 
     const handleSubmit = (e) => {
@@ -38,7 +39,7 @@ const AddEdit = () => {
         else{
             // Add User
             if(!id){
-                axios.post("http://localhost:5000/api/post", {
+                axios.post("http://localhost:5000/api/post-applicant", {
                     name,
                     email,
                     password,
@@ -52,7 +53,7 @@ const AddEdit = () => {
                 // Update User
             }
              else{
-                axios.put(`http://localhost:5000/api/updateuser/${id}`, {
+                axios.put(`http://localhost:5000/api/update-applicant/${id}`, {
                     name,
                     email,
                     password,
@@ -64,7 +65,7 @@ const AddEdit = () => {
                 toast.success("Contact Updated Successfully");
             }
 
-            setTimeout(() => navigate("/"), 500);
+            setTimeout(() => navigate("/applicants"), 500);
         }
     };
 
@@ -131,12 +132,11 @@ const AddEdit = () => {
             </select>
             
                 <input type="submit" value={id ? "Update" : "save"}/>
-                <Link to={"/"}>
+                <Link to={"/applicants"}>
                     <input type="button" value={"Go Back"}/>
                 </Link>
             </form>    
         </div>
     );
-
 };
 export default AddEdit;

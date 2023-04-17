@@ -2,33 +2,17 @@ import React, {useState,useEffect} from 'react';
 import {toast} from 'react-toastify';
 import axios from 'axios';
 
-const ShowRequests = () => {
-
+const ShowHistory = () => {
     const[data, setData] = useState([]);
     
     const loadData = async () => {
-        const respons = await axios.get("http://localhost:5000/api/get-requests");
+        const respons = await axios.get("http://localhost:5000/api/get-history-requests");
         setData(respons.data);
     };
     
     useEffect(() =>{
         loadData();
     },[]);
-    const acceptRequest = (ID) => {
-        if(window.confirm("Are You Sure That Wanted Update that ?")){
-            axios.put(`http://localhost:5000/api/accept-request/${ID}`);
-            toast.success("Request Accepted Successfully");
-            setTimeout( () => loadData(), 500);
-        }
-    }
-
-    const rejectRequest = (ID) => {
-        if(window.confirm("Are You Sure That Wanted Update that ?")){
-            axios.put(`http://localhost:5000/api/reject-request/${ID}`);
-            toast.success("Request Rejected Successfully");
-            setTimeout( () => loadData(), 500);
-        }
-    }
 
     const deleteRequest = (ID) => {
         if(window.confirm("Are You Sure That Wanted Delete that ?")){
@@ -37,9 +21,7 @@ const ShowRequests = () => {
             setTimeout( () => loadData(), 500);
         }
     }
-
     return (
-        
         <div style={{marginTop: "150px"}}>
 
             <table className='styled-table'>
@@ -63,9 +45,7 @@ const ShowRequests = () => {
                                 <td>{item.user_ID}</td>
                                 <td>{item.status}</td>
                                 <td>{item.requested_Date}</td>
-
-                                <button className='btn btn-edit' onClick={() => acceptRequest(item.ID)}>Accept</button>
-                                <button className='btn btn-delete' onClick={() => rejectRequest(item.ID)}>Reject</button>
+                                
                                 <button className='btn btn-delete' onClick={() => deleteRequest(item.ID)}>Delete</button>
                                 
                             </tr>
@@ -74,11 +54,7 @@ const ShowRequests = () => {
                 </tbody>
             </table>
         </div>
-       
     );
-
-
 };
 
-
-export default ShowRequests;
+export default ShowHistory;

@@ -3,7 +3,7 @@ const db = require ("../Database/DatabseConn");
 
 
 
-//SelectAll From Qulaifications
+//Select All From Qulaifications
 router.get("/api/get-qualifications", (req, res) => {
     const sqlGet = "SELECT * FROM qualification";
     db.query(sqlGet, (error, result)=>{
@@ -11,6 +11,7 @@ router.get("/api/get-qualifications", (req, res) => {
     });
 }); 
 
+// Save New Qualification
 router.post("/api/post-qualifications",(req,res) => {
     const{description} = req.body;
     const sqlInsert = "INSERT INTO `qualification` (`description`) VALUES (?)";
@@ -21,6 +22,7 @@ router.post("/api/post-qualifications",(req,res) => {
     });
 });
 
+// Delete Qualification
 router.delete("/api/remove-qualification/:id",(req,res) => {
     const{ id } = req.params;
     const sqlRemove = "DELETE FROM `qualification` WHERE id=? ";
@@ -30,6 +32,8 @@ router.delete("/api/remove-qualification/:id",(req,res) => {
         }
     });
 });
+
+// Select Spacific Qualification
 router.get("/api/get-qualification/:id", (req, res) => {
     const{ id } = req.params;
     const sqlGet = "SELECT * FROM qualification WHERE id=?";
@@ -38,7 +42,8 @@ router.get("/api/get-qualification/:id", (req, res) => {
     });
 });
 
-router.put("/api/updatqualification/:id", (req, res) => {
+// Update Qualification
+router.put("/api/update-qualification/:id", (req, res) => {
     const{ id } = req.params;
     const{description} = req.body;
     const sqlUpdata = "UPDATE qualification SET description=? WHERE id=? ";
@@ -47,16 +52,4 @@ router.put("/api/updatqualification/:id", (req, res) => {
     });
 });
 
-
-
-
-// router.get("/",(req,res) => {
-
-//     const sqlInsert = "INSERT INTO `qualification` (`description`) VALUES ('backend 5 years')";
-//     db.query(sqlInsert, (err,result)=>{
-//         console.log("error: ",err);
-//         console.log("Results: ",result);
-//         res.send("Hello Express");
-//     })
-// });
 module.exports = router;

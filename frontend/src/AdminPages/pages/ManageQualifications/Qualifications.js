@@ -20,7 +20,7 @@ useEffect(() =>{
         const deleteQualification = (id) => {
             if(window.confirm("Are You Sure That Wanted Delete that ?")){
                 axios.delete(`http://localhost:5000/api/remove-qualification/${id}`);
-                toast.success("content Deleted Successfully");
+                toast.success("Qualification Deleted Successfully");
                 setTimeout( () => loadData(), 500);
             }
         }
