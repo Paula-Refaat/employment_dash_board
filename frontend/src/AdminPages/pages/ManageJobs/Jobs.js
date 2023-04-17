@@ -15,6 +15,7 @@ const Jobs = () => {
     useEffect(() =>{
         loadData();
     },[]);
+    
     const deleteJob = (ID) => {
         if(window.confirm("Are You Sure That Wanted Delete that ?")){
             axios.delete(`http://localhost:5000/api/remove-job/${ID}`);

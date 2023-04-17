@@ -9,6 +9,7 @@ import Qualifications from "./AdminPages/pages/ManageQualifications/Qualificatio
 import AddEditQualification from "./AdminPages/pages/ManageQualifications/AddEditQualification";
 import Jobs from "./AdminPages/pages/ManageJobs/Jobs";
 import AddEditJob from "./AdminPages/pages/ManageJobs/AddEditJob";
+import ShowRequests from "./AdminPages/pages/ManageRequests/ShowRequests";
 
 
 
@@ -20,16 +21,25 @@ function App() {
       <ToastContainer position='top-center'/>
 
       <Routes>
+        {/* Applicant */}
         <Route exact path="/" Component={Applicant} />
         <Route path="/adduser" Component={AddEdit} />
         <Route path="/updateuser/:id" Component={AddEdit} />
         <Route path="/viewuser/:id" Component={ViewApplicants} />
+
+        {/* Qualifications */}
         <Route path="/qualifications" Component={Qualifications} />
         <Route path="/addqualification" Component={AddEditQualification} />
         <Route path="/updatequalification/:id" Component={AddEditQualification} />
+
+        {/* Jobs */}
         <Route path="/jobs" Component={Jobs} />
         <Route path="/addjob" Component={AddEditJob} />
         <Route path="/updatejob/:ID" Component={AddEditJob} />
+
+        {/* Requsts */}
+        <Route  path="/requests" Component={ShowRequests} />
+       
        
       </Routes>
     </div>
