@@ -50,7 +50,8 @@ const AddEdit = () => {
                 toast.success("Contact Added Successfully");
 
                 // Update User
-            } else{
+            }
+             else{
                 axios.put(`http://localhost:5000/api/updateuser/${id}`, {
                     name,
                     email,

@@ -4,9 +4,8 @@ import {useNavigate, Link, useParams} from 'react-router-dom';
 // import './Style/Qualifications.css';
 import {toast} from 'react-toastify';
 import axios from 'axios';
-const initialState = {
-    status : "",
-};
+
+
 const ShowRequests = () => {
 
     const[data, setData] = useState([]);
@@ -20,23 +19,29 @@ const ShowRequests = () => {
         loadData();
     },[]);
 
+    const handel = e =>{
+        setData(e.target.value);
+    }
+
 
 
     const acceptRequest = (ID) => {
         if(window.confirm("Are You Sure That Wanted Update that ?")){
-            axios.post(`http://localhost:5000/api/accept/${ID}`);
+            axios.put(`http://localhost:5000/api/accept/${ID}`);
             toast.success("Successfully");
             setTimeout( () => loadData(), 500);
         }
+        
+     
     }
 
-    const deleteRequest = (ID) => {
-        if(window.confirm("Are You Sure That Wanted Delete that ?")){
-            axios.delete(`http://localhost:5000/api/remove-request/${ID}`);
-            toast.success("content Deleted Successfully");
-            setTimeout( () => loadData(), 500);
-        }
-    }
+    // const deleteRequest = (ID) => {
+    //     if(window.confirm("Are You Sure That Wanted Delete that ?")){
+    //         axios.delete(`http://localhost:5000/api/remove-request/${ID}`);
+    //         toast.success("content Deleted Successfully");
+    //         setTimeout( () => loadData(), 500);
+    //     }
+    // }
 
     return (
         
@@ -63,11 +68,10 @@ const ShowRequests = () => {
                                 <td>{item.user_ID}</td>
                                 <td>{item.status}</td>
                                 <td>{item.requested_Date}</td>
-                                {/* <td>{item.Qualification}</td> */}
-                                <td>                                
-                                <button className='' onClick={() => acceptRequest(item.ID)}>Acc</button>
-                                <button className='btn btn-delete' onClick={() => deleteRequest(item.ID)}>Delete</button>
-                                </td>
+
+                                <button className='btn btn-delete' onClick={() => acceptRequest(item.ID)}>A</button>
+                                {/* <button className='btn btn-delete' onClick={() => deleteRequest(item.ID)}>Delete</button> */}
+                                
 
                             </tr>
                         );

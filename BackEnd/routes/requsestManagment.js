@@ -19,25 +19,14 @@ router.get("/api/get-request/:ID", (req, res) => {
 });
 
 
-router.put("/api/reject/:ID", (req, res) => {
-    const{ ID } = req.params;
-     const{status} = req.body;
-    const sqlUpdata = "UPDATE job_requests SET status='Rejected' WHERE ID=? ";
-    db.query(sqlUpdata, [status,ID] , (error, result)=>{
-        res.send(result);
-    });
-});
-
-
 router.put("/api/accept/:ID", (req, res) => {
     const{ ID } = req.params;
-     const{status} = req.body;
-    const sqlUpdata = "UPDATE job_requests SET status='Accepted' WHERE ID=8 ";
+     const{status} = req.body; 
+    const sqlUpdata = "UPDATE `job_requests` SET `status`='Accepted' WHERE ID=?";
     db.query(sqlUpdata, [status,ID] , (error, result)=>{
         res.send(result);
     });
 });
-
 
 router.delete("/api/remove-request/:ID",(req,res) => {
     const{ ID } = req.params;
@@ -48,8 +37,6 @@ router.delete("/api/remove-request/:ID",(req,res) => {
         }
     });
 });
-
-
 
 
 
