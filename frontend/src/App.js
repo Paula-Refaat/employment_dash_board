@@ -11,6 +11,9 @@ import Jobs from "./AdminPages/pages/ManageJobs/Jobs";
 import AddEditJob from "./AdminPages/pages/ManageJobs/AddEditJob";
 import ShowRequests from "./AdminPages/pages/ManageRequests/ShowRequests";
 import ShowHistory from "./AdminPages/pages/ManageRequests/ShowHistory";
+import Home from "./AdminPages/pages/Home/Home";
+import Header from "./AdminPages/Shared/Header";
+
 
 
 
@@ -20,11 +23,11 @@ function App() {
 
     <div className="App">
       <ToastContainer position='top-center'/>
-
+      <Header />
       <Routes>
+        
         {/* Applicant */}
-
-        {/* <Route exact path="/" Component={} /> */}
+        <Route exact path="/" Component={Home} />
         <Route exact path="/applicants" Component={Applicant} />
         <Route path="/adduser" Component={AddEdit} />
         <Route path="/updateuser/:id" Component={AddEdit} />

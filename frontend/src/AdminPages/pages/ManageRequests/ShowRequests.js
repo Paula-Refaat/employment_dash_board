@@ -1,4 +1,5 @@
 import React, {useState,useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import axios from 'axios';
 
@@ -67,10 +68,14 @@ const ShowRequests = () => {
                                 <button className='btn btn-edit' onClick={() => acceptRequest(item.ID)}>Accept</button>
                                 <button className='btn btn-delete' onClick={() => rejectRequest(item.ID)}>Reject</button>
                                 <button className='btn btn-delete' onClick={() => deleteRequest(item.ID)}>Delete</button>
-                                
                             </tr>
                         );
                     })};
+                        <br/>
+                        <Link to={"/history-requests"} >
+                        <div className='btn btn-edit'  >Show History</div>
+                        </Link>  
+                      
                 </tbody>
             </table>
         </div>

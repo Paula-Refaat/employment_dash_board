@@ -132,6 +132,7 @@ const AddEdit = () => {
             </select>
             
                 <input type="submit" value={id ? "Update" : "save"}/>
+                
                 <Link to={"/applicants"}>
                     <input type="button" value={"Go Back"}/>
                 </Link>
