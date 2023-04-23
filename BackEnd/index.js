@@ -14,7 +14,6 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 
-    //create Get API.
     app.use(user);
     app.use(qualification);
     app.use(job);
