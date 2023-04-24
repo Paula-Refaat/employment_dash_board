@@ -20,6 +20,17 @@ router.get("/api/get-history-requests", (req, res) => {
 }); 
 
 
+// Select History Requests Of Spacific Applicant
+router.get("/api/get-applicant-requests/:user_ID", (req, res) => {
+    const{ user_ID } = req.params;
+    const sqlGet = "SELECT * FROM job_requests WHERE user_ID=?";
+    db.query(sqlGet, user_ID , (error, result)=>{
+        res.send(result);
+    });
+});
+
+
+
 // Accept a Request
 router.put("/api/accept-request/:ID", (req, res) => {
      const{ ID } = req.params;

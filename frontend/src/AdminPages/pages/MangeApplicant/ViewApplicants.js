@@ -42,7 +42,10 @@ const ViewApplicants = () => {
                     </Link>    
                     <Link to={`/updateuser/${id}`} >
                         <div className='btn btn-edit'>Update</div>
-                    </Link>                
+                    </Link>   
+                    <Link to={`/history-requests-applicant/${id}`} >
+                        <div className='btn btn-edit'>Show history</div>
+                    </Link>               
                 </div>
             </div>
         </div>

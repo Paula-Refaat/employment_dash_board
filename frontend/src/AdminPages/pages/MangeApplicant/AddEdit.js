@@ -125,11 +125,10 @@ const AddEdit = () => {
 
             <label htmlFor='status'>Status</label>
 
-            <select className='status' name="status" value={status || ""} onChange={handleInputChange}>
-            <optgroup label="Select Status">
+            <select className='status' name="status" value={status || ""} onChange={handleInputChange}>     
+            <option className='status'>Select Status...</option>               
             <option className='status-act'>Active</option>
             <option className='status-inact'>inActive</option>
-            </optgroup>
             </select>
             
                 <input type="submit" value={id ? "Update" : "save"}/>

@@ -47,7 +47,9 @@ const ShowHistory = () => {
                                 <td>{item.requested_Date}</td>
                                 
                                 <button className='btn btn-delete' onClick={() => deleteRequest(item.ID)}>Delete</button>
-                                
+                                <Link to={`/history-requests-applicant/${item.user_ID}`}>
+                                <button className='btn btn-edit'>Show requests user</button>
+                                </Link>
                             </tr>
                         );
                     })};

@@ -12,7 +12,8 @@ import AddEditJob from "./AdminPages/pages/ManageJobs/AddEditJob";
 import ShowRequests from "./AdminPages/pages/ManageRequests/ShowRequests";
 import ShowHistory from "./AdminPages/pages/ManageRequests/ShowHistory";
 import Home from "./AdminPages/pages/Home/Home";
-import Header from "./AdminPages/Shared/Header";
+import ApplicantHistory from "./AdminPages/pages/ManageRequests/ApplicantHistory";
+ import Header from "./AdminPages/Shared/Header";
 
 
 
@@ -46,6 +47,8 @@ function App() {
         {/* Requsts */}
         <Route  path="/requests" Component={ShowRequests} />
         <Route path="/history-requests" Component={ShowHistory} />
+        <Route path="/history-requests-applicant/:user_ID" Component={ApplicantHistory} />
+
        
        
       </Routes>
