@@ -1,19 +1,28 @@
+import image from './images/ApplyNow.jpg'
 import React from 'react';
 
 const Home = () => {
     return (
 
         <div className='row'>
+        {/* <br></br>
+        <br></br>
+        <br></br>
+        <br></br> */}
+       {/*  <h1>Welcome to Admin Page</h1> */}
+        <div style={{
+            width:'2000px',
+            height:'900px',
+            backgroundRepeat:'no-repeat',
+            backgroundSize:'cover',
+            backgroundAttachment:'fixed',
+            backgroundPosition:'center',
+            backgroundImage:`url(${image})`
+        }}></div>
 
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <p>aaaaaaaaaaaaaaaa</p>
-
-        <div className='paula'>
-
-        </div>
+        {/* <div class="cont">
+        <img className='body' src={image} alt="logo"/>
+        </div> */}
         
  
         </div>

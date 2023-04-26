@@ -23,7 +23,7 @@ function App() {
     <BrowserRouter>
 
     <div className="App">
-      <ToastContainer position='top-center'/>
+      <ToastContainer position='bottom-center'/>
       <Header />
       <Routes>
         
