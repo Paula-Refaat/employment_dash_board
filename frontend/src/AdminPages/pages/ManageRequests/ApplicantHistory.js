@@ -1,9 +1,11 @@
 import React, {useState,useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import axios from 'axios';
+import Header from '../../Shared/Header';
 
 const ApplicantHistory = () => {
 
+    //Get Status of Request 
 
     const[data, setData] = useState([]);
     const {user_ID} = useParams();
@@ -17,34 +19,23 @@ const ApplicantHistory = () => {
         loadData();
     },[]);
 
-    const[userdata, setuserdata] = useState([]);
-    const loaduserdata = async () => {
-        
-        const respons = await axios.get(`http://localhost:5000/api/get-applicant/${user_ID}`);
-        setuserdata(respons.data);
-    };
-    
-    useEffect(() =>{
-        loaduserdata();
-    },[]);
+
+    // Get Applicant name
+    const [userdata, setuserdata] = useState({});
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/get-applicant/${user_ID}`).then((resp) => setuserdata({ ...resp.data[0]}))
+    },[user_ID])
+
 
     return (
         <div style={{marginTop: "150px"}}>
-
+            <Header/>
         <table className='styled-table'>
             <thead>
-                {userdata.map((user)=>{
-                return(
-                    <>
                     <div  style={{fontSize:"20px",color:"red",margin:"20px",}}>
                     <span>Name : </span>
-                    <span style={{color:"black"}}>{user.name}</span>
+                    <span style={{color:"black"}}>{userdata.name}</span>
                     </div>
-                    
-                    </>
-                )
-                
-                })}
                
                 <tr>
                     <td style={{textAlign:"center"}}>NO.</td>
@@ -55,11 +46,12 @@ const ApplicantHistory = () => {
                 </tr>
 
             </thead>
+            
             <tbody>
                {data.map((item , index) =>{
                     return(
                         <tr key={item.ID}>
-                            <th scope='row'>{index+1}</th>
+                            <th scope='row'>{index+1}</th>        
                             <td>{item.job_ID}</td>
                             <td>{item.status}</td>
                             <td>{item.requested_Date}</td>

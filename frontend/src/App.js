@@ -13,7 +13,7 @@ import ShowRequests from "./AdminPages/pages/ManageRequests/ShowRequests";
 import ShowHistory from "./AdminPages/pages/ManageRequests/ShowHistory";
 import Home from "./AdminPages/pages/Home/Home";
 import ApplicantHistory from "./AdminPages/pages/ManageRequests/ApplicantHistory";
- import Header from "./AdminPages/Shared/Header";
+//  import Header from "./AdminPages/Shared/Header";
 
 
 
@@ -24,7 +24,7 @@ function App() {
 
     <div className="App">
       <ToastContainer position='bottom-center'/>
-      <Header />
+      {/* <Header /> */}
       <Routes>
         
         {/* Applicant */}

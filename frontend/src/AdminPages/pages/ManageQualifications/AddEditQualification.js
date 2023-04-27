@@ -3,6 +3,7 @@ import {useNavigate, Link, useParams} from 'react-router-dom';
 import './Style/AddEditQualification.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Header from '../../Shared/Header';
 
 const initialState = {
     description : "",
@@ -54,6 +55,7 @@ const AddEditQualification = () => {
 
     return (
         <div className='container'>
+            <Header/>
         <div style={{marginTop : "140px"}}>
             <form 
                 onSubmit = {handleSubmit} 

@@ -3,6 +3,7 @@ import {useNavigate, Link, useParams} from 'react-router-dom';
 // import './Style/AddEdit.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Header from '../../Shared/Header';
 
 const initialState = {
     Position : "",
@@ -43,7 +44,7 @@ useEffect(() =>{
         
                 }
                 else{
-                    // Add User
+                    // Add Job
                     if(!ID){
                         axios.post("http://localhost:5000/api/post-job", {
                             Position,
@@ -56,7 +57,7 @@ useEffect(() =>{
                         }).catch((err) => toast.error(err.response.data));
                         toast.success("Job Added Successfully");
         
-                        // Update User
+                        // Update Job
                     } else{
                         axios.put(`http://localhost:5000/api/update-job/${ID}`, {
                             Position,
@@ -83,7 +84,8 @@ useEffect(() =>{
 
     return (
         <div style={{marginTop : "100px"}}>
-        <form style={{
+            <Header/>
+        <form  style={{
             margin : "auto",
             padding : "15px",
             maxWidth : "400px",

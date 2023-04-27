@@ -1,10 +1,13 @@
 import image from './images/ApplyNow.jpg'
 import React from 'react';
-
+import Header from '../../Shared/Header';
 const Home = () => {
+    
     return (
+        
 
         <div className='row'>
+            <Header/>
         {/* <br></br>
         <br></br>
         <br></br>

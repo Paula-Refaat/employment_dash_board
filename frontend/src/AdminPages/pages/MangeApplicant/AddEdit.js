@@ -3,6 +3,7 @@ import {useNavigate, Link, useParams} from 'react-router-dom';
 import './Style/AddEdit.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Header from '../../Shared/Header';
 
 const initialState = {
     name : "",
@@ -76,6 +77,7 @@ const AddEdit = () => {
 
     return (
         <div style={{marginTop : "100px"}}>
+            <Header/>
             <form style={{
                 margin : "auto",
                 padding : "15px",

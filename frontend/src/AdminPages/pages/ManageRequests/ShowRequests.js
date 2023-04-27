@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import axios from 'axios';
+import Header from '../../Shared/Header';
 
 const ShowRequests = () => {
 
@@ -32,17 +33,17 @@ const ShowRequests = () => {
     }
 
     const deleteRequest = (ID) => {
-        if(window.confirm("Are You Sure That Wanted Delete that ?")){
+        
             axios.delete(`http://localhost:5000/api/remove-request/${ID}`);
             toast.success("Request Deleted Successfully");
             setTimeout( () => loadData(), 500);
-        }
+        
     }
 
     return (
         
         <div style={{marginTop: "150px"}}>
-
+<Header/>
             <table className='styled-table'>
                 <thead>
                     <tr>

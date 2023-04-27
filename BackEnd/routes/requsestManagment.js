@@ -30,7 +30,6 @@ router.get("/api/get-applicant-requests/:user_ID", (req, res) => {
 });
 
 
-
 // Accept a Request
 router.put("/api/accept-request/:ID", (req, res) => {
      const{ ID } = req.params;
