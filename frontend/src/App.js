@@ -13,6 +13,8 @@ import ShowRequests from "./AdminPages/pages/ManageRequests/ShowRequests";
 import ShowHistory from "./AdminPages/pages/ManageRequests/ShowHistory";
 import Home from "./AdminPages/pages/Home/Home";
 import ApplicantHistory from "./AdminPages/pages/ManageRequests/ApplicantHistory";
+import Login from "./Auth/Login";
+import Register from "./Auth/Register";
 //  import Header from "./AdminPages/Shared/Header";
 
 
@@ -25,8 +27,16 @@ function App() {
     <div className="App">
       <ToastContainer position='bottom-center'/>
       {/* <Header /> */}
+
       <Routes>
-        
+
+        {/* Auth */}
+
+        <Route exact path="/login" Component={Login} />
+        <Route exact path="/register" Component={Register} />
+
+
+
         {/* Applicant */}
         <Route exact path="/" Component={Home} />
         <Route exact path="/applicants" Component={Applicant} />
@@ -49,9 +59,11 @@ function App() {
         <Route path="/history-requests" Component={ShowHistory} />
         <Route path="/history-requests-applicant/:user_ID" Component={ApplicantHistory} />
 
-       
+        <Route path="*" Component={Home} />
        
       </Routes>
+
+      
     </div>
     
     </BrowserRouter>
