@@ -30,7 +30,7 @@ const Register = () => {
       .then((resp) => {
         setRegister({ ...register, loading: false, err: [] });
         setAuthUser(resp.data);
-        navigate("/");
+        navigate("/login");
       })
       .catch((errors) => {
         setRegister({

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
+// import { toast } from 'react-toastify';
 import "./Style/Login.css";
 import axios from "axios";
 import { setAuthUser } from "../helper/Storage";
@@ -42,9 +43,10 @@ const Login = () => {
       <h1>Login Form</h1>
 
       {login.err.map((error, index) => (
-        <Alert key={index} variant="danger" className="p-2">
-          {error.msg}
-        </Alert>
+            <Alert key={index} variant="danger" className="p-2">
+                 {(error.msg)}
+              </Alert>
+      
       ))}
 
       <Form onSubmit={LoginFun}>

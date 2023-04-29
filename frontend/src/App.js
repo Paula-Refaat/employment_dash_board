@@ -15,6 +15,9 @@ import Home from "./AdminPages/pages/Home/Home";
 import ApplicantHistory from "./AdminPages/pages/ManageRequests/ApplicantHistory";
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
+import Guest from "./middleware/Guest";
+import Admin from "./middleware/Admin";
+
 //  import Header from "./AdminPages/Shared/Header";
 
 
@@ -22,23 +25,24 @@ import Register from "./Auth/Register";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter >
 
     <div className="App">
       <ToastContainer position='bottom-center'/>
       {/* <Header /> */}
 
-      <Routes>
-
+    
         {/* Auth */}
+    <Routes element ={Guest}> 
+        <Route element={Guest}  path="/login" Component={Login} />
+        <Route element={Guest}  path="/register" Component={Register} />
+    </Routes>
 
-        <Route exact path="/login" Component={Login} />
-        <Route exact path="/register" Component={Register} />
 
-
+    <Routes element={Admin}>
 
         {/* Applicant */}
-        <Route exact path="/" Component={Home} />
+        <Route  exact path="/" Component={Home} />
         <Route exact path="/applicants" Component={Applicant} />
         <Route path="/adduser" Component={AddEdit} />
         <Route path="/updateuser/:id" Component={AddEdit} />
@@ -59,7 +63,7 @@ function App() {
         <Route path="/history-requests" Component={ShowHistory} />
         <Route path="/history-requests-applicant/:user_ID" Component={ApplicantHistory} />
 
-        <Route path="*" Component={Home} />
+        {/* <Route path="*" Component={Home} /> */}
        
       </Routes>
 
