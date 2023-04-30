@@ -2,7 +2,7 @@ import React, { useState , useEffect } from 'react';
 import {Link, useParams} from 'react-router-dom';
 import axios from 'axios';
 import "./Style/ViewApplicants.css"
-import Header from '../../Shared/Header';
+
 
 const ViewApplicants = () => {
     const [user, setUser] = useState({});
@@ -15,7 +15,7 @@ const ViewApplicants = () => {
 
     return (
         <div style={{marginTop : "150px"}}>
-            <Header/>
+          
             <div className='card'>
                 <div className='card-header'>
                     <p>User Contact Details</p>

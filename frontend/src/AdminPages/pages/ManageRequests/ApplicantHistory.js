@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import axios from 'axios';
-import Header from '../../Shared/Header';
+
 
 const ApplicantHistory = () => {
 
@@ -29,7 +29,7 @@ const ApplicantHistory = () => {
 
     return (
         <div style={{marginTop: "150px"}}>
-            <Header/>
+        
         <table className='styled-table'>
             <thead>
                     <div  style={{fontSize:"20px",color:"red",margin:"20px",}}>

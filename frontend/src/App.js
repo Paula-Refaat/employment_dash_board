@@ -17,8 +17,11 @@ import Login from "./Auth/Login";
 import Register from "./Auth/Register";
 import Guest from "./middleware/Guest";
 import Admin from "./middleware/Admin";
+import ListJobs from "./ApplicantPages/Pages/ListJobs/ListJobs";
+import ViewJob from "./ApplicantPages/Pages/ListJobs/ViewJob";
 
-//  import Header from "./AdminPages/Shared/Header";
+
+  import Header from "./AdminPages/Shared/Header";
 
 
 
@@ -29,7 +32,7 @@ function App() {
 
     <div className="App">
       <ToastContainer position='bottom-center'/>
-      {/* <Header /> */}
+      <Header />
 
     
         {/* Auth */}
@@ -64,7 +67,14 @@ function App() {
         <Route path="/history-requests-applicant/:user_ID" Component={ApplicantHistory} />
 
         {/* <Route path="*" Component={Home} /> */}
-       
+      </Routes>
+
+
+
+{/* Applicant */}
+      <Routes>
+      <Route path="/list-jobs" Component={ListJobs} />
+      <Route path="/viewjob/:ID" Component={ViewJob} />
       </Routes>
 
       

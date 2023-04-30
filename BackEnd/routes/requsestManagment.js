@@ -30,6 +30,20 @@ router.get("/api/get-applicant-requests/:user_ID", (req, res) => {
 });
 
 
+
+
+////////////////////////////////////////////////////////////
+// AddRequest ==> very important
+router.post("/api/add-request", (req, res) => {
+    const{job_ID, user_ID} = req.body;
+    const sqlInsert = "INSERT INTO `job_requests` (`job_ID`, `user_ID`) VALUES (?, ?)";
+   db.query(sqlInsert, [job_ID, user_ID] , (error, result)=>{
+       res.send(result);
+   });
+});
+////////////////////////////////////////////////////////////
+
+
 // Accept a Request
 router.put("/api/accept-request/:ID", (req, res) => {
      const{ ID } = req.params;
@@ -38,6 +52,8 @@ router.put("/api/accept-request/:ID", (req, res) => {
         res.send(result);
     });
 });
+
+
 
 
 // Reject a Request

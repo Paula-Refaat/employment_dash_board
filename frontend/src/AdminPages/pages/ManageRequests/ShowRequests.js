@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import axios from 'axios';
-import Header from '../../Shared/Header';
+
 
 const ShowRequests = () => {
 
@@ -43,7 +43,7 @@ const ShowRequests = () => {
     return (
         
         <div style={{marginTop: "150px"}}>
-<Header/>
+
             <table className='styled-table'>
                 <thead>
                     <tr>
@@ -69,6 +69,9 @@ const ShowRequests = () => {
                                 <button className='btn btn-edit' onClick={() => acceptRequest(item.ID)}>Accept</button>
                                 <button className='btn btn-delete' onClick={() => rejectRequest(item.ID)}>Reject</button>
                                 <button className='btn btn-delete' onClick={() => deleteRequest(item.ID)}>Delete</button>
+                                {/* <Link to={`/history-requests-applicant/${item.user_ID}`}>
+                                <button className='btn btn-edit'>Show requests user</button>
+                                </Link> */}
                             </tr>
                         );
                     })};

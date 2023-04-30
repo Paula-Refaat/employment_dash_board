@@ -1,0 +1,22 @@
+.div{
+    background-color: rgba(0, 0, 0, 0.039);
+}
+.txt{
+    color: rgba(0, 0, 0, 0.709);
+}
+.xx {
+    border: 1px solid rgba(0, 128, 0, 0.306);
+    border-radius: 7px;
+}
+/* .yy{
+    background-image: url("../../AdminPages/pages/Home/images/ApplyNow.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+} */
+.txt{
+    position: absolute;
+    margin-left: 30px;
+    
+}

@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import axios from 'axios';
-import Header from '../../Shared/Header';
+
 
 const ShowHistory = () => {
     const[data, setData] = useState([]);
@@ -24,7 +24,7 @@ const ShowHistory = () => {
     }
     return (
         <div style={{marginTop: "150px"}}>
-            <Header/>
+        
             <table className='styled-table'>
                 <thead>
                     <tr>

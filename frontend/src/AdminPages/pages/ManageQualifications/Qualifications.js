@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import './Style/Qualifications.css';
 import {toast} from 'react-toastify';
 import axios from 'axios';
-import Header from '../../Shared/Header';
+
 
 const Qualifications = () => {
     const[data, setData] = useState([]);
@@ -29,7 +29,7 @@ useEffect(() =>{
 
     return (
         <div style={{marginTop: "150px"}}>
-            <Header/>
+        
              <Link to={"/addqualification"}>
                 <button className='btn btn-contact'>Add New Qualification</button>
             </Link>

@@ -44,6 +44,7 @@ const Header = () =>{
               <>
                 <li>
                 <Link to={'/applicants'}>Manage Applicant</Link>
+               
                 </li>
                 <li>
                 <Link to={'/qualifications'}>Manage Qualifications</Link>
@@ -62,6 +63,20 @@ const Header = () =>{
               </>
             )}
             </li>
+
+            <li>
+            {auth && auth.type === 0 && (
+              <>
+                <li>
+                <Link to={'/list-jobs'}>List Jobs</Link>
+               
+                </li>
+
+
+              </>
+            )}
+            </li>
+
             {/* Authenticated Routes  */}
                 <li>
                 {auth && <Nav.Link onClick={Logout}>Logout</Nav.Link>}

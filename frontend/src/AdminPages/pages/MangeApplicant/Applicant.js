@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import "./Style/Applicant.css";
 import {toast} from 'react-toastify';
 import axios from 'axios';
-import Header from '../../Shared/Header';
+
 
 const Applicant = () => {
     const[data, setData] = useState([]);
@@ -23,7 +23,7 @@ const Applicant = () => {
     return (
         
         <div style={{marginTop: "150px"}}>
-            <Header/>
+          
 
                 <Link to={"/adduser"}>
                 <button className='btn btn-contact'>Add New Applicant</button>

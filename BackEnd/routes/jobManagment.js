@@ -4,12 +4,15 @@ const db = require("../Database/DatabseConn");
 
 //Select All From Jobs
 router.get("/api/get-jobs", (req, res) => {
-    const sqlGet = "SELECT * FROM job";
+    let search = "";
+    if(req.query.search){
+        search = `WHERE Position LIKE '%${req.query.search}%'`
+    }
+    const sqlGet = `SELECT * FROM job ${search}`;
     db.query(sqlGet, (error, result)=>{
         res.send(result);
     });
 });
-
 
 //Save New Job
 router.post("/api/post-job",(req,res) => {

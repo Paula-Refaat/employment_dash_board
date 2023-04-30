@@ -1,9 +1,8 @@
 import React, {useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
-// import "./Style/Applicant.css";
 import {toast} from 'react-toastify';
 import axios from 'axios';
-import Header from '../../Shared/Header';
+
 
 const Jobs = () => {
     const[data, setData] = useState([]);
@@ -16,18 +15,22 @@ const Jobs = () => {
     useEffect(() =>{
         loadData();
     },[]);
-    
+
     const deleteJob = (ID) => {
-      
             axios.delete(`http://localhost:5000/api/remove-job/${ID}`);
             toast.success("Job Deleted Successfully");
-            setTimeout( () => loadData(), 500);
-        
+            setTimeout( () => loadData(), 500); 
     }
+
+////////////////////////////////////////////////////////////
+    // AddRequest ==> very important
+
+////////////////////////////////////////////////////////////
+
 
     return (
 <div style={{marginTop: "150px"}}>
-    <Header/>
+
 
                 <Link to={"/addjob"}>
                 <button className='btn btn-contact'>Add New Job</button>
@@ -47,6 +50,7 @@ const Jobs = () => {
                     </tr>
                 </thead>
                 <tbody>
+              
                     {data.map((item , index) =>{
                         return(
                             <tr key={item.ID}>
@@ -57,12 +61,12 @@ const Jobs = () => {
                                 <td>{item.MaxCandidateNumber}</td>
                                 <td>{item.Qualification}</td>
 
-
                                 <td>
                                 <Link to={`/updatejob/${item.ID}`}>
                                         <button className='btn btn-edit'>Edit</button>
                                     </Link>
                                     <button className='btn btn-delete' onClick={() => deleteJob(item.ID)}>Delete</button>
+                                    {/* <button className='btn btn-delete' onClick={() => sendrequest(item.ID,auth.id)}>send Request</button> */}
                                 </td>
 
                             </tr>
