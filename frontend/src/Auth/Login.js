@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Alert from "react-bootstrap/Alert";
-// import { toast } from 'react-toastify';
 import "./Style/Login.css";
 import axios from "axios";
 import { setAuthUser } from "../helper/Storage";
 import { useNavigate } from "react-router-dom";
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -38,46 +35,47 @@ const Login = () => {
         });
       });
   };
+  
   return (
     <div className="login-container">
-      <h1>Login Form</h1>
-
+      <h1 className="title">Login Form</h1>
       {login.err.map((error, index) => (
-            <Alert key={index} variant="danger" className="p-2">
-                 {(error.msg)}
-              </Alert>
+            // <Alert key={index} variant="danger" className="p-2">
+            //      {(error.msg)}
+            //   </Alert>   
+             
+              <div className="btn btn-contact" >
+                {(error.msg)}
+              </div>
       
       ))}
 
-      <Form onSubmit={LoginFun}>
-        <Form.Group className="mb-3">
-          <Form.Control
-            type="email"
-            placeholder="Email"
-            required
-            value={login.email}
-            onChange={(e) => setLogin({ ...login, email: e.target.value })}
-          />
-        </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            required
-            value={login.password}
-            onChange={(e) => setLogin({ ...login, password: e.target.value })}
-          />
-        </Form.Group>
 
-        <Button
-          className="btn btn-dark w-100"
-          variant="primary"
-          type="submit"
-          disabled={login.loading === true}>
-          Login
-        </Button>
-      </Form>
+
+<div class = "total">
+        <div class="loginbox">
+		<form onSubmit={LoginFun}>
+			{/* <p>Username</p> */}
+			<input type="text"
+      placeholder="Enter Email" 
+      required
+      value={login.email}
+      onChange={(e) => setLogin({ ...login, email: e.target.value })}
+      />
+      <br/><br/><br/>
+			{/* <p>Password</p> */}
+			<input type="Password"
+      placeholder="Enter Password"
+      required
+      value={login.password}
+      onChange={(e) => setLogin({ ...login, password: e.target.value })}
+         />
+
+			<input type="submit" name="" value="Login" disabled={login.loading === true} />
+		</form> 
+        </div>
+        </div>
     </div>
   );
 };

@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Alert from "react-bootstrap/Alert";
 import axios from "axios";
 import { setAuthUser } from "../helper/Storage";
 import { useNavigate } from "react-router-dom";
+import "./Style/Login.css";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -44,64 +42,63 @@ const Register = () => {
   return (
     <div className="login-container">
       <h1>Registration Form</h1>
-
       {register.err.map((error, index) => (
-        <Alert key={index} variant="danger" className="p-2">
-          {error.msg}
-        </Alert>
+        // <Alert key={index} variant="danger" className="p-2">
+        //   {error.msg}
+        // </Alert>
+              <div className="btn btn-contact" >
+                {(error.msg)}
+            </div>
       ))}
 
-      <Form onSubmit={RegisterFun}>
-        <Form.Group className="mb-3">
-          <Form.Control
-            type="text"
-            placeholder="Full Name"
-            value={register.name}
-            onChange={(e) => setRegister({ ...register, name: e.target.value })}
-          />
-        </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Control
-            type="email"
-            placeholder="Email"
-            value={register.email}
-            onChange={(e) =>
-              setRegister({ ...register, email: e.target.value })
-            }
-          />
-        </Form.Group>
+<div class = "total">
+        <div class="loginbox">
 
-        <Form.Group className="mb-3">
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            value={register.password}
-            onChange={(e) =>
-              setRegister({ ...register, password: e.target.value })
-            }
-          />
-        </Form.Group>
+		<form onSubmit={RegisterFun}>
+			<input type="text"
+      placeholder="Enter Full Name"
+      value={register.name}
+      onChange={(e) => setRegister({ ...register, name: e.target.value })}
+         />
 
-        <Form.Group className="mb-3">
-          <Form.Control
-            type="number"
-            placeholder="Phone"
-            value={register.phone}
-            onChange={(e) =>
-              setRegister({ ...register, phone: e.target.value })
-            }
-          />
-        </Form.Group>
+       <br />
+      <br />
+      
+			<input type="text"
+       name=""
+      placeholder="Enter Email"
+      value={register.email}
+      onChange={(e) =>
+        setRegister({ ...register, email: e.target.value })
+      }
+      />
+      <br />
+      <br />
 
-        <Button
-          className="btn btn-dark w-100"
-          variant="primary"
-          type="submit"
-          disabled={register.loading === true}>
-          register
-        </Button>
-      </Form>
+<input type="password"
+       name=""
+      placeholder="Enter Password"
+      value={register.password}
+      onChange={(e) =>
+        setRegister({ ...register, password: e.target.value })
+      }
+      />
+      <br />
+      <br />
+
+      <input type="number"
+       name=""
+      placeholder="Enter Phone NO."
+      value={register.phone}
+      onChange={(e) =>
+        setRegister({ ...register, phone: e.target.value })
+      }
+      />
+			<input type="submit" name="" value="Register" disabled={register.loading === true} />
+		</form> 
+        </div>
+        </div>
     </div>
   );
 };

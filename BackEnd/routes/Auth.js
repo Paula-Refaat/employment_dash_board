@@ -52,8 +52,9 @@ router.post(
           ],
         });
       }
-    } catch (err) {
-      res.status(500).json({ err: err });
+    } 
+    catch (err) {
+     // res.status(500).json({ err: err });
     }
   }
 );
@@ -107,7 +108,7 @@ router.post(
       delete userData.password;
       res.status(200).json(userData);
     } catch (err) {
-      res.status(500).json({ err: err });
+      // res.status(500).json({ err: err });
     }
   }
 );

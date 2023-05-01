@@ -14,6 +14,7 @@ router.get("/api/get-jobs", (req, res) => {
     });
 });
 
+
 //Save New Job
 router.post("/api/post-job",(req,res) => {
     const{Position,Description,Offer,MaxCandidateNumber,Qualification} = req.body;
@@ -24,6 +25,7 @@ router.post("/api/post-job",(req,res) => {
         }
     });
 });
+
 
 // Delete Job
 router.delete("/api/remove-job/:ID",(req,res) => {
@@ -36,6 +38,7 @@ router.delete("/api/remove-job/:ID",(req,res) => {
     });
 });
 
+
 //Select Spacific Job
 router.get("/api/get-job/:ID", (req, res) => {
     const{ ID } = req.params;
@@ -44,6 +47,39 @@ router.get("/api/get-job/:ID", (req, res) => {
         res.send(result);
     });
 });
+
+
+// LIST, SEARCH --> [ADMIN, USER]
+
+// LIST & SEARCH [ADMIN, USER]
+// router.get("/search", async (req, res) => {
+//     const query = util.promisify(db.query).bind(db);
+//     let search = "";
+//     if (req.query.search) {
+//       // QUERY PARAMS
+//       search = `where Position LIKE '%${req.query.search}%'`;
+//     }
+//     const movies = await query(`select * from movies ${search}`);
+//     movies.map((movie) => {
+//       movie.image_url = "http://" + req.hostname + ":4000/" + movie.image_url;
+//     });
+//     res.status(200).json(movies);
+//   });
+
+
+// LIST, SEARCH --> [ADMIN, USER]
+router.get("", async (req, res) => {
+
+    const query = util.promisify(db.query).bind(db);
+    let search = ""
+    if (req.query.search) {
+        search = `where Position LIKE '%${req.query.search}%'or Description LIKE '%${req.query.search}%'`;
+    };
+    const job = await query(`select * from job ${search}`)
+
+    res.status(200).json(job);
+});
+
 
 // Update Job
 router.put("/api/update-job/:ID", (req, res) => {
@@ -54,5 +90,7 @@ router.put("/api/update-job/:ID", (req, res) => {
         res.send(result);
     });
 });
+
+
 
 module.exports = router;
