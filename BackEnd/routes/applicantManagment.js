@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const db = require("../Database/DatabseConn");
-//const bycrbt = require('bcrypt');
+const bcrypt = require("bcrypt");
+const crypto = require("crypto");
+const util = require("util"); 
 
 
 //Select All Applicant
@@ -13,14 +15,19 @@ router.get("/api/get-applicant", (req, res) => {
 
 
 //create Post API.
-router.post("/api/post-applicant",(req,res) => {
-    const{name,email,password,phone,status} = req.body;
-    const sqlInsert = "INSERT INTO `users` (`name`, `email`, `password`,`phone`,`status`) VALUES (?, ?, ?, ?, ?)";
-    db.query(sqlInsert, [name, email, password, phone, status], (error, result)=>{
-        if(error){
-            console.log(error);
-        }
-    });
+router.post("/api/post-applicant",async(req,res) => {
+  const query = util.promisify(db.query).bind(db); 
+  const userData = {
+    name: req.body.name,
+    email: req.body.email,
+    password: await bcrypt.hash(req.body.password, 10)  ,
+    token: crypto.randomBytes(16).toString("hex"),
+    phone: req.body.phone,
+    status:req.body.status // JSON WEB TOKEN, CRYPTO -> RANDOM ENCRYPTION STANDARD
+  };
+  await query("insert into users set ? ", userData);
+  delete userData.password;
+  res.status(200).json(userData);
 });
 
 
