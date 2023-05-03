@@ -80,6 +80,14 @@ router.get("", async (req, res) => {
     res.status(200).json(job);
 });
 
+router.post("/search", (req, res) => {
+    const{user_ID,key_word} = req.body;
+    const sqlInsert = "INSERT INTO `user_search` (`user_ID`,`key_word`) VALUES (?,?)";
+   db.query(sqlInsert, [user_ID,key_word] , (error, result)=>{
+       res.send(result);
+   });
+});
+
 
 // Update Job
 router.put("/api/update-job/:ID", (req, res) => {

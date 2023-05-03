@@ -32,7 +32,6 @@ const AddEdit = () => {
         e.preventDefault();
         if(!name || !email || !password ||  !phone || !status ){
             toast.error("Please Provide value into each input field");
-
         }
         else if(!email.includes("@")){
             toast.error("Please Enter Valid Email");

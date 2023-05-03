@@ -3,12 +3,16 @@ import {Link} from 'react-router-dom';
 //import JobCard from "../../../components/JobCard";
 // import Form from 'react-bootstrap/Form';
 import axios from 'axios';
- import Spinner from 'react-bootstrap/Spinner';
+//import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
+import { toast } from 'react-toastify';
 import  './Style/ListJob.css';
+import { getAuthUser } from "../../../helper/Storage";
+
 
 
 const ListSearchJobs = () => {
+  const auth = getAuthUser();
     const [jobs , setjobs] = useState ({
         loading : true ,
         results : [],
@@ -19,6 +23,7 @@ const ListSearchJobs = () => {
 
        useEffect( () => {
         setjobs({...jobs, loading : true});
+        
        axios 
        .get("http://localhost:5000/api/get-jobs",{
         params:{
@@ -41,8 +46,17 @@ const ListSearchJobs = () => {
       const searchJobs = (e) => {
         e.preventDefault();
         setjobs({...jobs, reload: jobs.reload +1 })
-      
       }
+
+
+      const sendsearch = (user_ID,key_word) => {
+        if(search){
+          axios.post("http://localhost:5000/search",{
+            user_ID,
+            key_word,
+        });
+        }
+}
 
 
     return (
@@ -52,7 +66,7 @@ const ListSearchJobs = () => {
 
 
           {/*Loader */}
-          {
+          {/* {
             jobs.loading === true && (
               <div className="text-center">
                   <Spinner animation="border" role="status">
@@ -60,7 +74,7 @@ const ListSearchJobs = () => {
                    </Spinner>
               </div> 
             )
-          }
+          } */}
           
            {/*List Jobs */}
           {
@@ -71,10 +85,11 @@ const ListSearchJobs = () => {
         <input type='text'
          name='name'
         placeholder='Search Job'
+        
         value={search}
         onChange={(e) => setSearch(e.target.value)}
          />
-        <button className='btn btn-edit'> Search </button>
+        <button className='btn btn-edit' onClick={() => sendsearch(auth.id,search)}> Search </button>
         </form>
         
       {/* <form onSubmit={searchJobs}>
@@ -119,9 +134,6 @@ const ListSearchJobs = () => {
         </div>
                 ))
               }
-               
-                
-               
             </div>
               </>
             )
@@ -138,9 +150,10 @@ const ListSearchJobs = () => {
 
            {
             jobs.loading === false && jobs.err == null && jobs.results.length === 0 && (     
-              <Alert variant="info" className='p-2'>
-                  No Jobs Found Related to Your Search
-               </Alert>
+              <button className='btn btn-contact'>
+                No Jobs Found Related to Your Search
+              </button>     
+       
             )}
         </div> 
     );
