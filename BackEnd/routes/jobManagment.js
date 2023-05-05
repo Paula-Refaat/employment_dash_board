@@ -14,14 +14,37 @@ router.get("/api/get-jobs", (req, res) => {
     });
 });
 
+//Select All From Jobs
+router.get("/api/get-jobs/qs", (req, res) => {
+    const sqlGet = "SELECT job.ID, qualification.description AS Qualifications FROM `job`join job_qualification on job.ID=job_qualification.job_ID JOIN qualification on qualification.id=job_qualification.qualification_ID";
+    db.query(sqlGet, (error, result)=>{
+        res.send(result);
+    });
+});
+
+
 
 //Save New Job
 router.post("/api/post-job",(req,res) => {
+    console.log(req.body);
     const{Position,Description,Offer,MaxCandidateNumber,Qualification} = req.body;
-    const sqlInsert = "INSERT INTO `job` (`Position`, `Description`, `Offer`,`MaxCandidateNumber`,`Qualification`) VALUES (?, ?, ?, ?, ?)";
+    const sqlInsert = "INSERT INTO `job` (`Position`, `Description`, `Offer`,`MaxCandidateNumber`,`Qualification`) VALUES (?, ?, ?, ?,'test')";
     db.query(sqlInsert, [Position, Description, Offer, MaxCandidateNumber, Qualification], (error, result)=>{
         if(error){
             console.log(error);
+        }
+        else{
+            console.log("leader");
+           const ist="INSERT INTO `job_qualification`( `job_ID`, `qualification_ID`) VALUES (?,?)";
+           req.body.selected.forEach(
+            (index)=>{ db.query(ist,[result.insertId,index],(res,err)=>{
+                if(err){
+                    console.log(err);
+                }
+               })}
+           )
+          
+
         }
     });
 });
@@ -95,6 +118,19 @@ router.put("/api/update-job/:ID", (req, res) => {
     const{Position, Description, Offer, MaxCandidateNumber, Qualification} = req.body;
     const sqlUpdata = "UPDATE job SET Position=? , Description=? , Offer=?, MaxCandidateNumber=?, Qualification=? WHERE ID=? ";
     db.query(sqlUpdata, [Position, Description, Offer, MaxCandidateNumber, Qualification, ID] , (error, result)=>{
+    const querydeleted="DELETE FROM `job_qualification` WHERE job_ID=?";
+    db.query(querydeleted,ID,()=>{
+        const ist="INSERT INTO `job_qualification`( `job_ID`, `qualification_ID`) VALUES (?,?)";
+            req.body.selected.forEach(
+             (index)=>{ db.query(ist,[ID,index],(res,err)=>{
+                 if(err){
+                     console.log(err);
+                 }
+                })}
+            )
+
+    });
+            
         res.send(result);
     });
 });

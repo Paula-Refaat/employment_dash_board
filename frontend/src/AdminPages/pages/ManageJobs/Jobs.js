@@ -6,10 +6,17 @@ import axios from 'axios';
 
 const Jobs = () => {
     const[data, setData] = useState([]);
+    const[qualification, setqualification] = useState([]);
     
     const loadData = async () => {
-        const respons = await axios.get("http://localhost:5000/api/get-jobs");
-        setData(respons.data);
+        const respons = await axios.get("http://localhost:5000/api/get-jobs")
+        .then(res=>{
+            axios.get("http://localhost:5000/api/get-jobs/qs")
+            .then(result=>{setqualification(result.data)})
+            setData(res.data);
+        })
+        
+        
     };
 
     useEffect(() =>{
@@ -59,7 +66,22 @@ const Jobs = () => {
                                 <td>{item.Description}</td>
                                 <td>{item.Offer}</td>
                                 <td>{item.MaxCandidateNumber}</td>
-                                <td>{item.Qualification}</td>
+                                <td>
+                                {qualification.map((key)=>{
+                                    if(item.ID===key.ID)
+                                    {
+                                        return(
+                                            <>
+                                            {key.Qualifications +" -- "}
+                                            </>
+
+                                    )
+                                    }
+                                    
+
+                                })}</td>
+                                
+
 
                                 <td>
                                 <Link to={`/updatejob/${item.ID}`}>
