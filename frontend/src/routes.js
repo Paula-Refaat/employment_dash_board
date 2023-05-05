@@ -19,6 +19,8 @@ import ShowRequests from "./AdminPages/pages/ManageRequests/ShowRequests";
 import ShowHistory from "./AdminPages/pages/ManageRequests/ShowHistory";
 import ApplicantHistory from "./AdminPages/pages/ManageRequests/ApplicantHistory";
 import PageNotFound from "./NotFound/PageNotFound";
+import ShowJobHistory from "./ApplicantPages/Pages/History/ShowJobHistory";
+import Requests from "./ApplicantPages/Pages/Requests/Requests";
 
 
 
@@ -67,6 +69,16 @@ export const routes = createBrowserRouter([
                 path: "/viewjob/:ID",
                 element: <ViewJob />,
               },
+              {
+                path: "/history",
+                element: <ShowJobHistory />,
+              },
+              {
+                path: "/requests-status",
+                element: <Requests />,
+              },
+
+              
             
             ],
           },

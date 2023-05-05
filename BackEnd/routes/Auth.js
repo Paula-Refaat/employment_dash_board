@@ -35,6 +35,22 @@ router.post(
         });
       }
 
+
+            // CHECK status
+            const statment = util.promisify(db.query).bind(db); // transform query mysql --> promise to use [await/async]
+            const status = await statment("select status from users where email = ? and status = 'Active' ", [
+              req.body.email,
+            ]);
+            if (status.length == 0) {
+              res.status(404).json({
+                errors: [
+                  {
+                    msg: "Admin Block Your Account !",
+                  },
+                ],
+              });
+            }
+
       // 3- COMPARE HASHED PASSWORD
       const checkPassword = await bcrypt.compare(
         req.body.password,
@@ -93,13 +109,15 @@ router.post(
           ],
         });
       }
-
+      
+      
+     else{
       // 3- PREPARE OBJECT USER TO -> SAVE
       const userData = {
         name: req.body.name,
         email: req.body.email,
         phone: req.body.phone,
-        password: await bcrypt.hash(req.body.password, 10)  ,
+        password: await bcrypt.hash(req.body.password, 10),
         token: crypto.randomBytes(16).toString("hex"), // JSON WEB TOKEN, CRYPTO -> RANDOM ENCRYPTION STANDARD
       };
 
@@ -107,10 +125,12 @@ router.post(
       await query("insert into users set ? ", userData);
       delete userData.password;
       res.status(200).json(userData);
+    }
     } catch (err) {
       // res.status(500).json({ err: err });
     }
   }
+  
 );
 
 module.exports = router;

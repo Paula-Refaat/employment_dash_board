@@ -6,7 +6,7 @@ const Home = () => {
     return (
         
 
-        <div className='row'>
+        <div className='row' >
            
         {/* <br></br>
         <br></br>

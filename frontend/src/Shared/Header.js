@@ -3,9 +3,10 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
-import { removeAuthUser, getAuthUser } from "../../helper/Storage";
+import { removeAuthUser, getAuthUser } from "../helper/Storage";
 import { useNavigate } from "react-router-dom";
-import '../Shared/Header.css'
+import './Header.css'
+
 const Header = () =>{
     const navigate = useNavigate();
     const auth = getAuthUser();
@@ -19,9 +20,9 @@ const Header = () =>{
      <header className="main-header">
         <nav>
             <ul>
-
                 <li>
                     <Link to={'/'}>Home</Link>
+                    
                 </li>
 
                 {/* unAuthenticated Route  */}
@@ -69,8 +70,14 @@ const Header = () =>{
               <>
                 <li>
                 <Link to={'/list-jobs'}>List Jobs</Link>
-               
                 </li>
+                <li>
+                <Link to={'/history'}>Show History</Link>
+                </li>
+                <li>
+                <Link to={'/requests-status'}>Show Requests</Link>
+                </li>
+                
 
 
               </>

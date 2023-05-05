@@ -17,19 +17,15 @@ const ShowRequests = () => {
         loadData();
     },[]);
     const acceptRequest = (ID) => {
-        if(window.confirm("Are You Sure That Wanted Update that ?")){
             axios.put(`http://localhost:5000/api/accept-request/${ID}`);
             toast.success("Request Accepted Successfully");
             setTimeout( () => loadData(), 500);
-        }
     }
 
     const rejectRequest = (ID) => {
-        if(window.confirm("Are You Sure That Wanted Update that ?")){
             axios.put(`http://localhost:5000/api/reject-request/${ID}`);
             toast.success("Request Rejected Successfully");
             setTimeout( () => loadData(), 500);
-        }
     }
 
     const deleteRequest = (ID) => {
