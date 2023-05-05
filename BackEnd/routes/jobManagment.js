@@ -135,6 +135,24 @@ router.put("/api/update-job/:ID", (req, res) => {
     });
 });
 
+//User Save Search in Database
+router.post("/search", (req, res) => {
+    const{user_ID,key_word} = req.body;
+    const sqlInsert = "INSERT INTO `user_search` (`user_ID`,`key_word`) VALUES (?,?)";
+   db.query(sqlInsert, [user_ID,key_word] , (error, result)=>{
+       res.send("Word Saved Successfully");
+   });
+});
+
+// User Get all Key-Words
+router.get("/search-history/:user_ID", (req, res) => {
+    const{ user_ID } = req.params;
+    const sqlGet = "SELECT * FROM `user_search` WHERE user_ID=?";
+    db.query(sqlGet, user_ID , (error, result)=>{
+        res.send(result);
+    });
+});
+
 // User Delete One Search
 router.delete("/delete-one-search/:id",(req,res) => {
     const{ id } = req.params;

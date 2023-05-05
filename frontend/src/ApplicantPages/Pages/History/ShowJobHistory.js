@@ -34,7 +34,6 @@ const ShowJobHistory = () => {
         <button className='btn btn-delete' onClick={() => clearAll()}>Clear All</button>
         <table className='styled-table'>
             <thead>
-                
                 <tr>
                     <td style={{textAlign:"center"}}>NO.</td>
                     <td style={{textAlign:"center"}}>Search</td>
@@ -48,7 +47,6 @@ const ShowJobHistory = () => {
                             <th scope='row'>{index+1}</th>        
                             <td>{item.key_word}</td>
                             <button className='btn btn-contact' onClick={() => deleteOneSearch(item.id)}>Delete</button>
-
                         </tr>
                     );
                 })};
