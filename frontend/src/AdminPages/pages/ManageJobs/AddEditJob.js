@@ -12,10 +12,17 @@ const initialState = {
     MaxCandidateNumber : "",
     Qualification : "",
 };
-
+let selected=[];
 const AddEditJob = () => {
 const[data, setData] = useState([]);
-    
+
+function selectedhandle(e){
+   
+    selected.push(e);
+    console.log(selected);
+   
+}
+
 const loadData = async () => {
     const respons = await axios.get("http://localhost:5000/api/get-qualifications");
     setData(respons.data);
@@ -23,6 +30,7 @@ const loadData = async () => {
 
 useEffect(() =>{
     loadData();
+    selected=[];
 },[]);
 
         const [state, setState] = useState(initialState);
@@ -35,11 +43,12 @@ useEffect(() =>{
 
             // select Spasific job
             useEffect(() => {
-                axios.get(`http://localhost:5000/api/get-job/${ID}`).then((resp) => setState({ ...resp.data[0]}))
+                axios.get(`http://localhost:5000/api/get-job/${ID}`).then((resp) => {setState({ ...resp.data[0]})})
             },[ID])
             const handleSubmit = (e) => {
                 e.preventDefault();
-                if(!Position || !Description || !Offer ||  !MaxCandidateNumber || !Qualification ){
+                initialState.Qualification='test';
+                if(!Position || !Description || !Offer ||  !MaxCandidateNumber ){
                     toast.error("Please Provide value into each input field");
         
                 }
@@ -52,6 +61,7 @@ useEffect(() =>{
                             Offer,
                             MaxCandidateNumber,
                             Qualification,
+                            selected,
                         }).then(()=>{
                             setState({ Position:"", Description:"", Offer:"", MaxCandidateNumber:"", Qualification:""});
                         }).catch((err) => toast.error(err.response.data));
@@ -59,12 +69,15 @@ useEffect(() =>{
         
                         // Update Job
                     } else{
+                        console.log(selected);
                         axios.put(`http://localhost:5000/api/update-job/${ID}`, {
                             Position,
                             Description,
                             Offer,
                             MaxCandidateNumber,
                             Qualification,
+                            selected,
+        
                         }).then(()=>{
                             setState({ Position:"", Description:"", Offer:"", MaxCandidateNumber:"", Qualification:""});
                         }).catch((err) => toast.error(err.response.data));
@@ -130,18 +143,18 @@ useEffect(() =>{
             onChange={handleInputChange}
             />
 
-            <label htmlFor='Qualification'>Qualification</label>
-
-            <label htmlFor='Qualification'>Qualification</label>
-            
-            <select className='Qualification' name="Qualification" value={Qualification || ""} onChange={handleInputChange}>
-            <option>Select Qualification...</option>
-                {data.map((item,index)=>{
+           
+            {data.map((item,index)=>{
                     return(
-                      <option className='status-act'>{item.description}</option>
+                        <div className='checkbox'>
+                      <input onChange={(e)=>{selectedhandle(e.target.value)}} type='checkbox'name={item.description}value={item.id}></input>
+                      <label htmlFor={item.description}>
+                       { item.description}
+                      </label>
+
+                      </div>
                     );
                 })};
-            </select>
                     
             <input type="submit" value={ID ? "Update" : "save"}/>
             <Link to={"/jobs"}>

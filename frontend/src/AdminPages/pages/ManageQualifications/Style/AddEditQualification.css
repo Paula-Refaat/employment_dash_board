@@ -31,3 +31,8 @@ textarea {
     align-content: center;
     height: 500px;
   }
+  .checkbox{
+    display: block;
+    margin-top: 5px;
+    text-align: start;
+  }
