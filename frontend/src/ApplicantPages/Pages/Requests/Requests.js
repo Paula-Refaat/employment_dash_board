@@ -26,7 +26,7 @@ const Requests = () => {
             <thead>
                 <tr>
                     <td style={{textAlign:"center"}}>NO.</td>
-                    <td style={{textAlign:"center"}}>Job ID</td>
+                    <td style={{textAlign:"center"}}>Job Name</td>
                     <td style={{textAlign:"center"}}>Status Request</td>
                     <td style={{textAlign:"center"}}>requested_Date</td>
                     {/* <td style={{textAlign:"center"}}>Actions</td> */}
@@ -39,7 +39,7 @@ const Requests = () => {
                     return(
                         <tr key={item.ID}>
                             <th scope='row'>{index+1}</th>        
-                            <td>{item.job_ID}</td>
+                            <td>{item.Position}</td>
                             <td>{item.status}</td>
                             <td>{item.requested_Date}</td>
                    

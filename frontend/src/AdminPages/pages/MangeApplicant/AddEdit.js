@@ -33,6 +33,9 @@ const AddEdit = () => {
         if(!name || !email || !password ||  !phone || !status ){
             toast.error("Please Provide value into each input field");
         }
+        // else if(name.length<4){
+        //     toast.error("Please");
+        // }
         else if(!email.includes("@")){
             toast.error("Please Enter Valid Email");
         }
@@ -47,8 +50,12 @@ const AddEdit = () => {
                     status,
                 }).then(()=>{
                     setState({ name:"", email:"", password:"", phone:"", status:""});
-                }).catch((err) => toast.error(err.response.data));
-                toast.success("Contact Added Successfully");
+                    toast.success("Contact Added Successfully");
+                    setTimeout(() => navigate("/applicants"), 500);
+                }).catch((err) => {toast.error(err.response.data.errors[0].msg)
+                    console.log(err.response);
+                });
+                
 
                 // Update User
             }
@@ -56,16 +63,18 @@ const AddEdit = () => {
                 axios.put(`http://localhost:5000/api/update-applicant/${id}`, {
                     name,
                     email,
-                    password,
+                    // password,
                     phone,
                     status,
                 }).then(()=>{
-                    setState({ name:"", email:"", password:"", phone:"",  status:""});
-                }).catch((err) => toast.error(err.response.data));
-                toast.success("Contact Updated Successfully");
+                    setState({ name:"", email:"", phone:"",  status:""});
+                    toast.success("Contact Updated Successfully");
+                    setTimeout(() => navigate("/applicants"), 500);
+                }).catch((err) => {toast.error(err.response.data.errors[0].msg)
+                    console.log(err.response);
+                });
+                
             }
-
-            setTimeout(() => navigate("/applicants"), 500);
         }
     };
 
@@ -111,7 +120,7 @@ const AddEdit = () => {
                 id='password'
                 name='password'
                 placeholder='Your password ...'
-                value={password || ""}
+                value={password}
                 onChange={handleInputChange}
                 />
                 <label htmlFor='phone'>Phone</label>

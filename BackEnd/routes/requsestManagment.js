@@ -5,7 +5,7 @@ const db = require ("../Database/DatabseConn");
 
 // Select All Requests
 router.get("/api/get-requests", (req, res) => {
-    const sqlGet = "SELECT * FROM job_requests WHERE status='Pending'";
+    const sqlGet =" SELECT job_requests.ID, `job_ID`, `user_ID`, job_requests.status,`requested_Date`,users.name,job.Position FROM `job_requests`join users on job_requests.user_ID=users.id join job on job_requests.job_ID=job.ID WHERE job_requests.status='Pending' ";
     db.query(sqlGet, (error, result)=>{
         res.send(result);
     });
@@ -15,7 +15,7 @@ router.get("/api/get-requests", (req, res) => {
 // Select History Requests Of Spacific Applicant
 router.get("/api/get-applicant-requests/:user_ID", (req, res) => {
     const{ user_ID } = req.params;
-    const sqlGet = "SELECT distinct job_ID , user_ID, status, requested_Date FROM job_requests WHERE user_ID=?";
+    const sqlGet = " SELECT job_requests.ID, `job_ID`, `user_ID`, job_requests.status,`requested_Date`,users.name,job.Position FROM `job_requests`join users on job_requests.user_ID=users.id join job on job_requests.job_ID=job.ID WHERE user_ID=?";
     db.query(sqlGet, user_ID , (error, result)=>{
         res.send(result);
     });
@@ -23,7 +23,7 @@ router.get("/api/get-applicant-requests/:user_ID", (req, res) => {
 
 // Select History Requests
 router.get("/api/get-history-requests", (req, res) => {
-    const sqlGet = "SELECT * FROM job_requests WHERE status='Accepted' or status = 'Rejected'";
+    const sqlGet = " SELECT job_requests.ID, `job_ID`, `user_ID`, job_requests.status,`requested_Date`,users.name,job.Position FROM `job_requests`join users on job_requests.user_ID=users.id join job on job_requests.job_ID=job.ID WHERE job_requests.status='Accepted' or job_requests.status = 'Rejected'";
     db.query(sqlGet, (error, result)=>{
         res.send(result);
     });

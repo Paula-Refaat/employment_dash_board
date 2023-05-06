@@ -27,23 +27,35 @@ router.get("/api/get-jobs/qs", (req, res) => {
 router.post("/api/post-job",(req,res) => {
     console.log(req.body);
     const{Position,Description,Offer,MaxCandidateNumber} = req.body;
-    const sqlInsert = "INSERT INTO `job` (`Position`, `Description`, `Offer`,`MaxCandidateNumber`) VALUES (?, ?, ?, ?)";
+    const sqlInsert = "INSERT INTO job (Position, Description, Offer,MaxCandidateNumber) VALUES (?, ?, ?, ?)";
     db.query(sqlInsert, [Position, Description, Offer, MaxCandidateNumber], (error, result)=>{
         if(error){
             console.log(error);
         }
         else{
-            console.log("leader");
-           const ist="INSERT INTO `job_qualification`( `job_ID`, `qualification_ID`) VALUES (?,?)";
-           req.body.selected.forEach(
-            (index)=>{ db.query(ist,[result.insertId,index],(res,err)=>{
-                if(err){
-                    console.log(err);
-                }
-               })}
-           )
-          
 
+           const ist="INSERT INTO job_qualification( job_ID, qualification_ID) VALUES (?,?)";
+           if(Array.isArray(req.body.selected)){
+            req.body.selected.forEach(
+                (index)=>{ db.query(ist,[result.insertId,index],(res,err)=>{
+                    if(err){
+                        console.log(err);
+                    }
+                    console.log("lol");
+                   })}
+               )
+           }
+           else{
+            [req.body.selected].forEach(
+                (index)=>{ db.query(ist,[result.insertId,index],(res,err)=>{
+                    if(err){
+                        console.log(err);
+                    }
+
+                   })}
+               )
+           }
+        res.send("Job Created Successfully");
         }
     });
 });
@@ -75,14 +87,14 @@ router.get("/api/get-job/:ID", (req, res) => {
 });
 
 //Save Search Key
-router.post("/search", (req, res) => {
+/* router.post("/search", (req, res) => {
     const{user_ID,key_word} = req.body;
     const sqlInsert = "INSERT INTO `user_search` (`user_ID`,`key_word`) VALUES (?,?)";
    db.query(sqlInsert, [user_ID,key_word] , (error, result)=>{
        res.send(result);
    });
 });
-
+ */
 
 // Update Job
 router.put("/api/update-job/:ID", (req, res) => {
@@ -90,29 +102,49 @@ router.put("/api/update-job/:ID", (req, res) => {
     const{Position, Description, Offer, MaxCandidateNumber} = req.body;
     const sqlUpdata = "UPDATE job SET Position=? , Description=? , Offer=?, MaxCandidateNumber=? WHERE ID=? ";
     db.query(sqlUpdata, [Position, Description, Offer, MaxCandidateNumber, ID] , (error, result)=>{
-    const querydeleted="DELETE FROM `job_qualification` WHERE job_ID=?";
+        if(error){
+            res.send("Don't Update");
+        }
+        else{
+    const querydeleted="DELETE FROM job_qualification WHERE job_ID=?";
     db.query(querydeleted,ID,()=>{
-        const ist="INSERT INTO `job_qualification`( `job_ID`, `qualification_ID`) VALUES (?,?)";
-            req.body.selected.forEach(
-             (index)=>{ db.query(ist,[ID,index],(res,err)=>{
-                 if(err){
-                     console.log(err);
-                 }
-                })}
-            )
+        const ist="INSERT INTO job_qualification( job_ID, qualification_ID) VALUES (?,?)";
+            if(Array.isArray(req.body.selected)){
+                req.body.selected.forEach(
+                    (index)=>{ db.query(ist,[ID,index],(res,err)=>{
+                        if(err){
+                            console.log(err);
+                        }
+                       })}
+                   )
+               }
+               else{
+                [req.body.selected].forEach(
+                    (index)=>{ db.query(ist,[ID,index],(res,err)=>{
+                        if(err){
+                            console.log(err);
+                        }
+                       })}
+                   )
+               }
     });
-            
-        res.send("Job Updated Successfully");
+         res.send("Job Updated Successfully");
+    }
     });
 });
 
 //User Save Search in Database
 router.post("/search", (req, res) => {
     const{user_ID,key_word} = req.body;
-    const sqlInsert = "INSERT INTO `user_search` (`user_ID`,`key_word`) VALUES (?,?)";
-   db.query(sqlInsert, [user_ID,key_word] , (error, result)=>{
-       res.send("Word Saved Successfully");
-   });
+    const sqlget="SELECT * FROM `job` WHERE Position=?";
+    db.query(sqlget,[key_word],(error,result) => {       
+        if(result[0] != undefined){
+            const sqlInsert = "INSERT INTO `user_search` (`user_ID`,`key_word`) VALUES (?,?)";
+            db.query(sqlInsert, [user_ID,key_word] , (error, result)=>{
+                res.send("Word Saved Successfully");
+            });
+        }
+    });
 });
 
 // User Get all Key-Words
