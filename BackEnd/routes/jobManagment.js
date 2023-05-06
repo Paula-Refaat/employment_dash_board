@@ -14,6 +14,7 @@ router.get("/api/get-jobs", (req, res) => {
     });
 });
 
+
 //Select All From Jobs
 router.get("/api/get-jobs/qs", (req, res) => {
     const sqlGet = "SELECT job.ID, qualification.description AS Qualifications FROM `job`join job_qualification on job.ID=job_qualification.job_ID JOIN qualification on qualification.id=job_qualification.qualification_ID";
@@ -22,14 +23,12 @@ router.get("/api/get-jobs/qs", (req, res) => {
     });
 });
 
-
-
 //Save New Job
 router.post("/api/post-job",(req,res) => {
     console.log(req.body);
-    const{Position,Description,Offer,MaxCandidateNumber,Qualification} = req.body;
-    const sqlInsert = "INSERT INTO `job` (`Position`, `Description`, `Offer`,`MaxCandidateNumber`,`Qualification`) VALUES (?, ?, ?, ?,'test')";
-    db.query(sqlInsert, [Position, Description, Offer, MaxCandidateNumber, Qualification], (error, result)=>{
+    const{Position,Description,Offer,MaxCandidateNumber} = req.body;
+    const sqlInsert = "INSERT INTO `job` (`Position`, `Description`, `Offer`,`MaxCandidateNumber`) VALUES (?, ?, ?, ?)";
+    db.query(sqlInsert, [Position, Description, Offer, MaxCandidateNumber], (error, result)=>{
         if(error){
             console.log(error);
         }
@@ -58,6 +57,10 @@ router.delete("/api/remove-job/:ID",(req,res) => {
         if(error){
             console.log(error);
         }
+        else{
+        res.send("Job Deleted Successfully");
+
+        }
     });
 });
 
@@ -71,38 +74,7 @@ router.get("/api/get-job/:ID", (req, res) => {
     });
 });
 
-
-// LIST, SEARCH --> [ADMIN, USER]
-
-// LIST & SEARCH [ADMIN, USER]
-// router.get("/search", async (req, res) => {
-//     const query = util.promisify(db.query).bind(db);
-//     let search = "";
-//     if (req.query.search) {
-//       // QUERY PARAMS
-//       search = `where Position LIKE '%${req.query.search}%'`;
-//     }
-//     const movies = await query(`select * from movies ${search}`);
-//     movies.map((movie) => {
-//       movie.image_url = "http://" + req.hostname + ":4000/" + movie.image_url;
-//     });
-//     res.status(200).json(movies);
-//   });
-
-
-// LIST, SEARCH --> [ADMIN, USER]
-router.get("", async (req, res) => {
-
-    const query = util.promisify(db.query).bind(db);
-    let search = ""
-    if (req.query.search) {
-        search = `where Position LIKE '%${req.query.search}%'or Description LIKE '%${req.query.search}%'`;
-    };
-    const job = await query(`select * from job ${search}`)
-
-    res.status(200).json(job);
-});
-
+//Save Search Key
 router.post("/search", (req, res) => {
     const{user_ID,key_word} = req.body;
     const sqlInsert = "INSERT INTO `user_search` (`user_ID`,`key_word`) VALUES (?,?)";
@@ -115,9 +87,9 @@ router.post("/search", (req, res) => {
 // Update Job
 router.put("/api/update-job/:ID", (req, res) => {
     const{ ID } = req.params;
-    const{Position, Description, Offer, MaxCandidateNumber, Qualification} = req.body;
-    const sqlUpdata = "UPDATE job SET Position=? , Description=? , Offer=?, MaxCandidateNumber=?, Qualification=? WHERE ID=? ";
-    db.query(sqlUpdata, [Position, Description, Offer, MaxCandidateNumber, Qualification, ID] , (error, result)=>{
+    const{Position, Description, Offer, MaxCandidateNumber} = req.body;
+    const sqlUpdata = "UPDATE job SET Position=? , Description=? , Offer=?, MaxCandidateNumber=? WHERE ID=? ";
+    db.query(sqlUpdata, [Position, Description, Offer, MaxCandidateNumber, ID] , (error, result)=>{
     const querydeleted="DELETE FROM `job_qualification` WHERE job_ID=?";
     db.query(querydeleted,ID,()=>{
         const ist="INSERT INTO `job_qualification`( `job_ID`, `qualification_ID`) VALUES (?,?)";
@@ -128,10 +100,9 @@ router.put("/api/update-job/:ID", (req, res) => {
                  }
                 })}
             )
-
     });
             
-        res.send(result);
+        res.send("Job Updated Successfully");
     });
 });
 
@@ -176,7 +147,7 @@ router.delete("/clearAll/:user_ID",(req,res) => {
             console.log(error);
         }
         else{
-        res.send("Search Deleted Successfully");
+        res.send("Search Cleared Successfully");
         }
     });
 });

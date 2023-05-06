@@ -65,7 +65,21 @@ router.post("/api/add-request", (req, res) => {
     const{job_ID, user_ID} = req.body;
     const sqlInsert = "INSERT INTO `job_requests` (`job_ID`, `user_ID`) VALUES (?, ?)";
    db.query(sqlInsert, [job_ID, user_ID] , (error, result)=>{
-       res.send("Job Send Sccussfully");
+    //    res.send("Job Send Sccussfully");
+    if(error){
+        console.log(error);
+    }
+       else{
+       const ist="INSERT INTO `user_job`( `job_ID`, `user_ID`) VALUES (?,?)";
+       db.query(ist,[job_ID, user_ID], (error,result)=>{
+        if(error){
+            console.log(error);
+        }
+        else{
+            res.send(result)
+        }
+       })
+    }
    });
 });
 ////////////////////////////////////////////////////////////

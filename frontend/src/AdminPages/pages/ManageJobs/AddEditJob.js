@@ -10,7 +10,7 @@ const initialState = {
     Description : "",
     Offer : "",
     MaxCandidateNumber : "",
-    Qualification : "",
+    // Qualification : "",
 };
 let selected=[];
 const AddEditJob = () => {
@@ -35,7 +35,7 @@ useEffect(() =>{
 
         const [state, setState] = useState(initialState);
 
-        const {Position, Description, Offer, MaxCandidateNumber, Qualification} = state;
+        const {Position, Description, Offer, MaxCandidateNumber} = state;
 
         const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ useEffect(() =>{
             },[ID])
             const handleSubmit = (e) => {
                 e.preventDefault();
-                initialState.Qualification='test';
+                // initialState.Qualification='test';
                 if(!Position || !Description || !Offer ||  !MaxCandidateNumber ){
                     toast.error("Please Provide value into each input field");
         
@@ -60,10 +60,10 @@ useEffect(() =>{
                             Description,
                             Offer,
                             MaxCandidateNumber,
-                            Qualification,
+                            // Qualification,
                             selected,
                         }).then(()=>{
-                            setState({ Position:"", Description:"", Offer:"", MaxCandidateNumber:"", Qualification:""});
+                            setState({ Position:"", Description:"", Offer:"", MaxCandidateNumber:""});
                         }).catch((err) => toast.error(err.response.data));
                         toast.success("Job Added Successfully");
         
@@ -75,11 +75,11 @@ useEffect(() =>{
                             Description,
                             Offer,
                             MaxCandidateNumber,
-                            Qualification,
+                            // Qualification,
                             selected,
         
                         }).then(()=>{
-                            setState({ Position:"", Description:"", Offer:"", MaxCandidateNumber:"", Qualification:""});
+                            setState({ Position:"", Description:"", Offer:"", MaxCandidateNumber:""});
                         }).catch((err) => toast.error(err.response.data));
                         toast.success("Job Updated Successfully");
                     }
