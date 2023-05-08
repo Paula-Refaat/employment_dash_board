@@ -80,9 +80,9 @@ router.post(
   "/register",
   body("email").isEmail().withMessage("please enter a valid email!"),
   body("name").isString().withMessage("please enter a valid name")
-    .isLength({ min: 10, max: 20 })
+    .isLength({ min: 3, max: 10 })
     .withMessage("name should be between (10-20) character"),
-    body("password").isLength({ min: 8, max: 12 })
+    body("password").isLength({ min: 3, max: 10 })
     .withMessage("password should be between (8-12) character"),
     body("phone").isLength({ min: 8, max: 12 })
     .withMessage("Phone should be between (8-12) number"),

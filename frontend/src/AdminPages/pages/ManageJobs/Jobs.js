@@ -72,7 +72,7 @@ const Jobs = () => {
                                     {
                                         return(
                                             <>
-                                            {key.Qualifications +" -- "}
+                                            - {key.Qualifications}<br/><br/>
                                             </>
 
                                     )

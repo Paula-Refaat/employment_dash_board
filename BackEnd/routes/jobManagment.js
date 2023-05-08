@@ -1,8 +1,11 @@
 const router = require("express").Router();
 const db = require("../Database/DatabseConn");
+// `SELECT * FROM job ${search}`
 
 
-//Select All From Jobs
+
+
+//Select All From Jobs For Admin 
 router.get("/api/get-jobs", (req, res) => {
     let search = "";
     if(req.query.search){
@@ -23,6 +26,7 @@ router.get("/api/get-jobs/qs", (req, res) => {
     });
 });
 
+
 //Save New Job
 router.post("/api/post-job",(req,res) => {
     console.log(req.body);
@@ -41,7 +45,7 @@ router.post("/api/post-job",(req,res) => {
                     if(err){
                         console.log(err);
                     }
-                    console.log("lol");
+                    console.log("Done");
                    })}
                )
            }
@@ -133,6 +137,7 @@ router.put("/api/update-job/:ID", (req, res) => {
     });
 });
 
+///////////////////////////////////////////////////////////////
 //User Save Search in Database
 router.post("/search", (req, res) => {
     const{user_ID,key_word} = req.body;
@@ -140,9 +145,16 @@ router.post("/search", (req, res) => {
     db.query(sqlget,[key_word],(error,result) => {       
         if(result[0] != undefined){
             const sqlInsert = "INSERT INTO `user_search` (`user_ID`,`key_word`) VALUES (?,?)";
-            db.query(sqlInsert, [user_ID,key_word] , (error, result)=>{
-                res.send("Word Saved Successfully");
+            db.query(sqlInsert, [user_ID,key_word] , (err, resu)=>{
+                if(resu){
+                    res.send("Word Saved Successfully");
+                }
+ 
             });
+            // res.send("Word Successfully");
+        }
+        else{
+            res.send("No Jobs Found Related To Your Search");
         }
     });
 });
@@ -181,6 +193,19 @@ router.delete("/clearAll/:user_ID",(req,res) => {
         else{
         res.send("Search Cleared Successfully");
         }
+    });
+});
+
+
+//Select All From Jobs For User 
+router.get("/api/get-available-jobs", (req, res) => {
+    let search = "";
+    if(req.query.search){
+        search = `Position LIKE '%${req.query.search}%' AND ` 
+    }
+    const sqlGet = `SELECT * FROM job WHERE (${search} ID NOT IN(SELECT job.ID FROM job_requests JOIN job ON job.ID=job_requests.job_ID WHERE (status = 'Accepted') GROUP BY job_requests.job_ID HAVING COUNT(status) = job.MaxCandidateNumber))`;
+    db.query(sqlGet, (error, result)=>{
+        res.send(result);
     });
 });
 

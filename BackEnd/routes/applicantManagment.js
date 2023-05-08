@@ -3,49 +3,15 @@ const db = require("../Database/DatabseConn");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
-const util = require("util"); 
+const util = require("util");
 
-
-
-//create Post API.
-// router.post("/apddsasd",async(req,res) => {
-//     const query = util.promisify(db.query).bind(db); // transform query mysql --> promise to use [await/async]
-//     const checkEmailExists = await query(
-//       "select * from users where email = ?",
-//       [req.body.email]
-//     );
-//     if (checkEmailExists.length > 0) {
-//       res.status(400).json({
-//         errors: [
-//           {
-//             msg: "email already exists !",
-//           },
-//         ],
-//       });
-//     }
-//    else{
-//     // 3- PREPARE OBJECT USER TO -> SAVE
-//     const userData = {
-//       name: req.body.name,
-//       email: req.body.email,
-//       phone: req.body.phone,
-//       password: await bcrypt.hash(req.body.password, 10),
-//       token: crypto.randomBytes(16).toString("hex"), // JSON WEB TOKEN, CRYPTO -> RANDOM ENCRYPTION STANDARD
-//     };
-
-//     // 4- INSERT USER OBJECT INTO DB
-//     await query("insert into users set ? ", userData);
-//     delete userData.password;
-//     res.status(200).json(userData);
-//   }  
-//    });
 
    router.post(
     "/api/post-applicant",
     body("email").isEmail().withMessage("please enter a valid email!"),
     body("name").isString().withMessage("please enter a valid name")
-      .isLength({ min: 10, max: 20 })
-      .withMessage("name should be between (10-20) character"),
+      .isLength({ min: 3, max: 10 })
+      .withMessage("name should be between (3-10) character"),
       body("password").isLength({ min: 8, max: 12 })
       .withMessage("password should be between (8-12) character"),
       body("phone").isLength({ min: 8, max: 12 })
@@ -104,7 +70,7 @@ router.get("/api/get-applicant", (req, res) => {
 
 // Select one Applicant
 router.get("/api/get-applicant/:id", (req, res) => {
-    const{ id } = req.params;
+    const{ id } = req.params; 
     const sqlGet = "SELECT * FROM users WHERE id=?";
     db.query(sqlGet, id , (error, result)=>{
         res.send(result);
@@ -116,8 +82,8 @@ router.get("/api/get-applicant/:id", (req, res) => {
 router.put("/api/update-applicant/:id",
 body("email").isEmail().withMessage("please enter a valid email!"),
 body("name").isString().withMessage("please enter a valid name")
-  .isLength({ min: 10, max: 20 })
-  .withMessage("name should be between (10-20) character"),
+  .isLength({ min: 3, max: 10 })
+  .withMessage("name should be between (3-10) character"),
   body("status").isLength({ min: 5, max: 9 })
   .withMessage("done"),
   body("phone").isLength({ min: 8, max: 12 })

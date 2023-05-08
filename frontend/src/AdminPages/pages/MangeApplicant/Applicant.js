@@ -20,6 +20,7 @@ const Applicant = () => {
             toast.success("content Deleted Successfully");
             setTimeout( () => loadData(), 500);
     }
+    
     return (
         
         <div style={{marginTop: "150px"}}>

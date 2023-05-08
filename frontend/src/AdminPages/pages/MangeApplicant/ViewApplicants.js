@@ -13,6 +13,7 @@ const ViewApplicants = () => {
         axios.get(`http://localhost:5000/api/get-applicant/${id}`).then((resp) => setUser({ ...resp.data[0]}))
     },[id])
 
+    
     return (
         <div style={{marginTop : "150px"}}>
           

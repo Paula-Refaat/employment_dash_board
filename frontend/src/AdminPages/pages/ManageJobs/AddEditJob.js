@@ -50,7 +50,6 @@ useEffect(() =>{
                 // initialState.Qualification='test';
                 if(!Position || !Description || !Offer ||  !MaxCandidateNumber ){
                     toast.error("Please Provide value into each input field");
-        
                 }
                 else{
                     // Add Job

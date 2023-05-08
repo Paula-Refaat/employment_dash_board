@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 //import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
-import { toast } from 'react-toastify';
+//import { toast } from 'react-toastify';
 import  './Style/ListJob.css';
 import { getAuthUser } from "../../../helper/Storage";
 
@@ -25,7 +25,7 @@ const ListSearchJobs = () => {
         setjobs({...jobs, loading : true});
         
        axios 
-       .get("http://localhost:5000/api/get-jobs",{
+       .get("http://localhost:5000/api/get-available-jobs",{
         params:{
           search: search,
         },
@@ -47,8 +47,7 @@ const ListSearchJobs = () => {
         e.preventDefault();
         setjobs({...jobs, reload: jobs.reload +1 })
       }
-
-
+      
       const sendsearch = (user_ID,key_word) => {
         if(search){
           axios.post("http://localhost:5000/search",{
@@ -57,8 +56,6 @@ const ListSearchJobs = () => {
         });
         }
 }
-
-
     return (
 
 
@@ -138,8 +135,6 @@ const ListSearchJobs = () => {
               </>
             )
           }
-          
- {/*Error Handling    السيرفر بيقع لما بغير الباث لازم نعمل رن من الأول*/}
 
           {
             jobs.loading === false && jobs.err != null && (     

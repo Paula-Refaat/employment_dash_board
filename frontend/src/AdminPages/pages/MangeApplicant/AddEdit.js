@@ -29,7 +29,7 @@ const AddEdit = () => {
     },[id])
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); // to prevent page refresh.
         if(!name || !email || !password ||  !phone || !status ){
             toast.error("Please Provide value into each input field");
         }

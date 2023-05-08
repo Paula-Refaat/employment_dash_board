@@ -34,7 +34,13 @@ router.put("/api/accept-request/:ID", (req, res) => {
      const{ ID } = req.params;
     const sqlUpdata = "UPDATE `job_requests` SET `status`='Accepted' WHERE ID=?";
     db.query(sqlUpdata, [ID] , (error, result)=>{
-        res.send(result);
+        if(result){
+            res.send("Request Accept Successfully");
+        }
+        else{
+            res.send(error);
+        }
+        
     });
 });
 
@@ -43,7 +49,12 @@ router.put("/api/reject-request/:ID", (req, res) => {
     const{ ID } = req.params;
    const sqlUpdata = "UPDATE `job_requests` SET `status`='Rejected' WHERE ID=?";
    db.query(sqlUpdata, [ID] , (error, result)=>{
-    res.send(result);
+    if(result){
+        res.send("Request Rejected Successfully");
+    }
+    else{
+        res.send(error);
+    }
 });
 });
 
@@ -52,14 +63,17 @@ router.delete("/api/remove-request/:ID",(req,res) => {
     const{ ID } = req.params;
     const sqlRemove = "DELETE FROM `job_requests` WHERE ID=? ";
     db.query(sqlRemove, [ ID ], (error, result)=>{
-        if(error){
-            console.log(error);
+        if(result){
+            res.send("Request Removed Successfully");
+        }
+        else{
+            res.send(error);
         }
     });
 });
 
 
-////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 // User AddRequest ==> very important
 router.post("/api/add-request", (req, res) => {
     const{job_ID, user_ID} = req.body;
@@ -72,11 +86,11 @@ router.post("/api/add-request", (req, res) => {
        else{
        const ist="INSERT INTO `user_job`( `job_ID`, `user_ID`) VALUES (?,?)";
        db.query(ist,[job_ID, user_ID], (error,result)=>{
-        if(error){
-            console.log(error);
+        if(result){
+            res.send("Request Added Successfully");
         }
         else{
-            res.send(result)
+            res.send(error);
         }
        })
     }
