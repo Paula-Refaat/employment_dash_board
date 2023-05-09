@@ -75,7 +75,7 @@ router.post(
   }
 );
 
-// REGISTRATION
+// rEGISTRATION
 router.post(
   "/register",
   body("email").isEmail().withMessage("please enter a valid email!"),
