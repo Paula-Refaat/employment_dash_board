@@ -182,7 +182,7 @@ router.delete("/delete-one-search/:id",(req,res) => {
     });
 });
 
-// user Clear All Search
+// user Clear all Search
 router.delete("/clearAll/:user_ID",(req,res) => {
     const{ user_ID } = req.params;
     const sqlRemove = "DELETE FROM `user_search` WHERE user_ID=? ";
